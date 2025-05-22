@@ -1,0 +1,40 @@
+Table users{
+    id int [pk, increment]
+    name varchar
+    email varchar
+    password varchar
+    role varchar [default: 'user'] // e.g., 'admin', 'user' 
+    created_at datetime
+    updated_at datetime
+}
+
+Table proposals{
+    id int [pk, increment]
+    user_id int [ref: > users.id]
+    project_name varchar
+    project_code varchar
+    client_name varchar
+    issue_date date
+    revision_label varchar [null] // e.g., '2023-10-01'
+    status varchar [default: 'pending'] // e.g., 'pending', 'approved', 'rejected'
+    notes text [null]
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table proposal_items{
+    id int [pk, increment]
+    proposal_id int [ref: > proposals.id]
+    code varchar // e.g., 'FF-301'
+    name varchar
+    description text [null]
+    quantity int
+    section varchar // e.g., 'All Day Dining'
+    thumbnail_path varchar [null]    // single “hero” image
+    materials jsonb  [null]          // array of material swatch URLs
+    drawings  jsonb  [null]          // array of drawing URLs
+    specs json [null] // like: finishes, swatches, dimensions, etc.
+    remarks text [null]
+    created_at timestamp
+    updated_at timestamp
+}
