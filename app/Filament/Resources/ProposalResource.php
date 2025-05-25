@@ -173,6 +173,18 @@ class ProposalResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('pdf')
+                    ->label('PDF')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->url(fn(Proposal $record) => route('proposals.pdf', $record))
+                    ->openUrlInNewTab(),
+
+                Tables\Actions\Action::make('preview')
+                    ->label('Preview')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn(Proposal $record) => route('filament.admin.resources.proposals.previewPdf', $record))
+                    ->openUrlInNewTab(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -197,6 +209,7 @@ class ProposalResource extends Resource
             'create' => Pages\CreateProposal::route('/create'),
             'view' => Pages\ViewProposal::route('/{record}'),
             'edit' => Pages\EditProposal::route('/{record}/edit'),
+            'previewPdf' => Pages\ProposalPreviewPdf::route('/{record}/preview'),
         ];
     }
 
