@@ -2,77 +2,140 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Proposal PDF</title>
-	<style>
+	{{-- <style>
 		@font-face {
 			font-family: "League Spartan";
 			font-style: normal;
 			font-weight: 100;
-			src: url('{{ public_path('fonts/leagueSpartan-Thin.ttf') }}') format('truetype');
+			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Thin.ttf') }}') format('truetype');
 		}
 
 		@font-face {
 			font-family: "League Spartan";
 			font-style: normal;
 			font-weight: 200;
-			src: url('{{ public_path('fonts/leagueSpartan-ExtraLight.ttf') }}') format('truetype');
+			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-ExtraLight.ttf') }}') format('truetype');
 		}
 
 		@font-face {
 			font-family: "League Spartan";
 			font-style: normal;
 			font-weight: 300;
-			src: url('{{ public_path('fonts/leagueSpartan-Light.ttf') }}') format('truetype');
+			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Light.ttf') }}') format('truetype');
 		}
 
 		@font-face {
 			font-family: "League Spartan";
 			font-style: normal;
 			font-weight: 400;
-			src: url('{{ public_path('fonts/leagueSpartan-Regular.ttf') }}') format('truetype');
+			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Regular.ttf') }}') format('truetype');
 		}
 
 		@font-face {
 			font-family: "League Spartan";
 			font-style: normal;
 			font-weight: 500;
-			src: url('{{ public_path('fonts/leagueSpartan-Medium.ttf') }}') format('truetype');
+			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Medium.ttf') }}') format('truetype');
 		}
 
 		@font-face {
 			font-family: "League Spartan";
 			font-style: normal;
 			font-weight: 600;
-			src: url('{{ public_path('fonts/leagueSpartan-SemiBold.ttf') }}') format('truetype');
+			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-SemiBold.ttf') }}') format('truetype');
 		}
 
 		@font-face {
 			font-family: "League Spartan";
 			font-style: normal;
 			font-weight: 700;
-			src: url('{{ public_path('fonts/leagueSpartan-Bold.ttf') }}') format('truetype');
+			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Bold.ttf') }}') format('truetype');
 		}
 
 		@font-face {
 			font-family: "League Spartan";
 			font-style: normal;
 			font-weight: 800;
-			src: url('{{ public_path('fonts/leagueSpartan-ExtraBold.ttf') }}') format('truetype');
+			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-ExtraBold.ttf') }}') format('truetype');
 		}
 
 		@font-face {
 			font-family: "League Spartan";
 			font-style: normal;
 			font-weight: 900;
-			src: url('{{ public_path('fonts/leagueSpartan-Black.ttf') }}') format('truetype');
+			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Black.ttf') }}') format('truetype');
 		}
 
 		body {
 			font-family: "League Spartan", sans-serif;
+		}
+	</style> --}}
+
+	<style>
+		@font-face {
+			font-family: "Open Sans";
+			font-style: normal;
+			font-weight: 400;
+			src: url('{{ public_path('fonts/open_sans/OpenSans-Regular.ttf') }}') format('truetype');
+		}
+
+		@font-face {
+			font-family: "Open Sans";
+			font-style: normal;
+			font-weight: 600;
+			src: url('{{ public_path('fonts/open_sans/OpenSans-SemiBold.ttf') }}') format('truetype');
+		}
+
+		@font-face {
+			font-family: "Open Sans";
+			font-style: normal;
+			font-weight: 700;
+			src: url('{{ public_path('fonts/open_sans/OpenSans-Bold.ttf') }}') format('truetype');
+		}
+
+		@font-face {
+			font-family: "Open Sans";
+			font-style: normal;
+			font-weight: 800;
+			src: url('{{ public_path('fonts/open_sans/OpenSans-ExtraBold.ttf') }}') format('truetype');
+		}
+
+		/* @font-face {
+			font-family: "Open Sans";
+			font-style: italic;
+			font-weight: 400;
+			src: url('{{ public_path('fonts/open_sans/OpenSans-Italic.ttf') }}') format('truetype');
+		}
+		@font-face {
+			font-family: "Open Sans";
+			font-style: italic;
+			font-weight: 600;
+			src: url('{{ public_path('fonts/open_sans/OpenSans-SemiBoldItalic.ttf') }}') format('truetype');
+		}
+		@font-face {
+			font-family: "Open Sans";
+			font-style: italic;
+			font-weight: 700;
+			src: url('{{ public_path('fonts/open_sans/OpenSans-BoldItalic.ttf') }}') format('truetype');
+		}
+		@font-face {
+			font-family: "Open Sans";
+			font-style: italic;
+			font-weight: 800;
+			src: url('{{ public_path('fonts/open_sans/OpenSans-ExtraBoldItalic.ttf') }}') format('truetype');
+		} */
+		body {
+			font-family: "Open Sans", sans-serif;
+		}
+	</style>
+	<meta charset="UTF-8">
+	<title>Proposal PDF</title>
+	<style>
+		body {
 			color: #000;
 			margin: 0;
 			padding: 0;
+			line-height: 1;
 		}
 
 		.uppercase {
@@ -103,7 +166,7 @@
 		.table th,
 		.table td {
 			border: 0.5px solid #000;
-			padding: 6px;
+			padding: 1px 4px;
 			text-transform: uppercase;
 		}
 
@@ -121,12 +184,12 @@
 		}
 
 		.table.equal-width {
-			table-layout: fixed;
+			table-layout: auto;
 			width: 100%;
 		}
 
 		.table.equal-width td {
-			width: 33.33%;
+			/* width: 33.33%; */
 			vertical-align: top;
 			word-break: break-word;
 			white-space: normal;
@@ -201,25 +264,42 @@
 			padding: 5px;
 			margin-top: 10px;
 		}
+
+		.fw-normal {
+			font-weight: 400;
+		}
+
+		.fw-semibold {
+			font-weight: 600;
+		}
+
+		.fw-bold {
+			font-weight: 700;
+		}
+
+		.fw-bolder {
+			font-weight: 800;
+		}
 	</style>
 
 </head>
 
 <body>
 	<!-- COVER PAGE -->
-	<div class="a4-size page-break" style="outline: 1px solid black;">
+	{{-- <div class="a4-size page-break" style="outline: 1px solid black;">
 		<div class="cover-page" style="position: relative; width: 100%; height: 100%;">
 			<!-- Centered intro -->
 			<div class="intro uppercase"
 				style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-				<img class="logo" src="{{ public_path('images/Houseofelm logo.png') }}" alt="House of Elm Logo">
+				<img class="logo" src="{{ public_path('images/Houseofelm logo.png') }}" alt="House of Elm Logo"
+					style="margin-bottom: 50px;">
 
-				<div class="project-info" style="margin-bottom: 30px;">
-					<div class="text-lg">Sarovar Portico,</div>
-					<div class="text-lg">Mumbai</div>
+				<div class="project-info" style="margin-bottom: 50px; font-size: 26px; line-height: 1;">
+					<div class="fw-bold">Sarovar Portico,</div>
+					<div class="fw-semibold">Mumbai</div>
 				</div>
 
-				<div class="description text-md">
+				<div class="description fw-bold text-md" style="line-height: 1;">
 					LOOSE FURNITURE<br>
 					SERIES 3.00<br>
 					ALL DAY DINING AND LIFT LOBBY
@@ -227,7 +307,7 @@
 			</div>
 
 			<!-- Footer -->
-			<div class="footer footer-text" style="position: absolute; bottom: 5mm; right: 5mm;">
+			<div class="footer footer-text fw-semibold" style="position: absolute; bottom: 5mm; right: 5mm;">
 				<div class="uppercase">
 					PREPARED BY:<br>HOUSE OF ELM<br>
 				</div>
@@ -242,16 +322,16 @@
 				Date of Issue: 31<sup>st</sup> MARCH 2025
 			</div>
 		</div>
-	</div>
+	</div> --}}
 
 
 	<!-- SPECIFICATION PAGE -->
-	<div class="a4-size page-break">
+	{{-- <div class="a4-size page-break">
 		<table class="table-borderless project-header">
 			<tr>
 				<td>
-					<b class="text-md uppercase">SAROVAR PORTICO, MUMBAI</b><br>
-					<div class="text-sm uppercase">PROJECT NUMBER: 20031<br>SCHEDULE FOR INTERIOR FINISHES</div>
+					<b class="fw-bold text-md uppercase">SAROVAR PORTICO, MUMBAI <br>
+					<div class="fw-bold text-sm uppercase">PROJECT NUMBER: 20031<br>SCHEDULE FOR INTERIOR FINISHES</div>
 					<div class="text-sm">Date of Issue: 31<sup>st</sup> MARCH 2025</div>
 				</td>
 				<td style="text-align: right;">
@@ -279,7 +359,7 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td colspan="4"><b>CASE GOOD</b></td>
+					<td colspan="4"> CASE GOOD </td>
 				</tr>
 				<tr>
 					<td>FF - 301</td>
@@ -291,24 +371,25 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
+	</div> --}}
 
 	{{-- SINGLE ITEM PAGE --}}
 	<table class="equal-width table">
 		<tr>
-			<td><b>PROJECT:</b><br><span>SAROVAR PORTICO, MUMBAI</span></td>
-			<td><b>MANUFACTURER'S DETAILS:</b><br><span>TO BID</span></td>
-			<td class="text-md" style="text-align: center !important;"><b>ITEM CODE:<br><span>FF - 301</span></b></td>
+			<td><span class="fw-semibold text-sm">PROJECT:</span> <br><span class="fw-bold">SAROVAR PORTICO, MUMBAI</span></td>
+			<td><span class="fw-semibold">MANUFACTURER'S DETAILS:</span> <br><span class="fw-bold">To bid</span></td>
+			<td class="text-md fw-bold" style="text-align: center !important;"> ITEM CODE:<br><span>FF - 301</span> </td>
 		</tr>
 		<tr>
-			<td><b>ITEM NAME:</b><br>DINING TABLE</td>
-			<td><b>DESCRIPTION:</b><br>LAMINATE WITH METAL AND TILE TOP DINING TABLE</td>
-			<td><b>TOTAL QUANTITY:</b><br>22 NOS</td>
+			<td><span class="fw-semibold text-sm">ITEM NAME:</span> <br><span>Dining table</span></td>
+			<td><span class="fw-semibold text-sm">DESCRIPTION:</span> <br><span>Laminate with metal and tile top
+					dining table</span></td>
+			<td><span class="fw-semibold text-sm">TOTAL QUANTITY:</span> <br><span>22 nos</span></td>
 		</tr>
 		<tr>
-			<td><b>AREA/LOCATION:</b><br>ALL DAY DINING</td>
-			<td><b>PRODUCT CODE:</b><br></td>
-			<td><b>REVISION:</b><br></td>
+			<td><span class="fw-semibold text-sm">AREA/LOCATION:</span> <br><span>All day dining</span></td>
+			<td><span class="fw-semibold text-sm">PRODUCT CODE:</span> <br><span></span></td>
+			<td><span class="fw-semibold text-sm">REVISION:</span> <br><span></span></td>
 		</tr>
 	</table>
 
@@ -317,14 +398,14 @@
 	<table class="table" style="margin-top: 10px;">
 		<tr>
 			<td style="width: 65%; vertical-align: top;">
-				<b>MODEL NUMBER:</b> CUSTOM FURNITURE<br>
-				<b>MODEL NAME:</b> CUSTOM MADE FURNITURE<br>
-				<b>WIDTH:</b> 700 MM<br>
-				<b>LENGTH:</b> 900 MM<br>
-				<b>HEIGHT:</b> 750 MM<br>
-				<b>MATERIAL:</b> METAL, WOOD AND TILE<br>
-				<b>DETAILS:</b> REFER TO FF&E SHOP DRAWING<br>
-				<b>NOTE:</b> SUPPLIER TO COORDINATE THE ITEMS STRUCTURE AND STABILITY.
+				MODEL NUMBER: CUSTOM FURNITURE<br>
+				MODEL NAME: CUSTOM MADE FURNITURE<br>
+				WIDTH: 700 MM<br>
+				LENGTH: 900 MM<br>
+				HEIGHT: 750 MM<br>
+				MATERIAL: METAL, WOOD AND TILE<br>
+				DETAILS: REFER TO FF&E SHOP DRAWING<br>
+				NOTE: SUPPLIER TO COORDINATE THE ITEMS STRUCTURE AND STABILITY.
 			</td>
 			<td style="width: 35%; text-align: center;">
 				<img class="spec-image" src="{{ public_path('images/item thumbnail 1.png') }}" alt="Furniture">
@@ -337,21 +418,21 @@
 					<tr style="text-align: center;">
 						<td>
 							<img class="material-swatch" src="{{ public_path('images/tile-finish.png') }}"><br>
-							<b>TILE FINISH</b><br>TL - 02
+							TILE FINISH <br>TL - 02
 						</td>
 						<td>
 							<img class="material-swatch" src="{{ public_path('images/metal-finish.png') }}"><br>
-							<b>METAL FINISH</b><br>MT - 02
+							METAL FINISH <br>MT - 02
 						</td>
 						<td>
 							<img class="material-swatch" src="{{ public_path('images/wood-finish.png') }}"><br>
-							<b>SOLID WOOD FINISH</b>
+							SOLID WOOD FINISH
 						</td>
 					</tr>
 				</table>
 
 				<br>
-				<b>General Notes:</b><br>
+				General Notes: <br>
 				<ul class="checklist">
 					<li>* Manufacturer to ensure support and stability of product.</li>
 					<li>* All construction methods and finishes must be of contract quality suitable for commercial and hospitality
@@ -366,13 +447,13 @@
 	<table class="table" style="margin-top: 10px;">
 		<tr>
 			<td style="width: 50%;">
-				<b>CONTACT PERSON:</b><br><br>
-				<b>TELEPHONE:</b><br>
-				<b>FACSIMILE:</b><br>
-				<b>E-MAIL:</b>
+				CONTACT PERSON: <br><br>
+				TELEPHONE: <br>
+				FACSIMILE: <br>
+				E-MAIL:
 			</td>
 			<td style="width: 50%;">
-				<b>REQUIRED ITEMS FOR DESIGN APPROVAL PRIOR TO FABRICATION:</b>
+				REQUIRED ITEMS FOR DESIGN APPROVAL PRIOR TO FABRICATION:
 				<ul class="checklist">
 					<li>Shop Drawing</li>
 					<li>Finish Sample</li>
@@ -383,7 +464,7 @@
 	</table>
 
 	<div class="remarks">
-		<b>REMARKS:</b><br>
+		REMARKS: <br>
 		This is a preliminary information sheet only and not for construction purposes. Refer to material reference boards &
 		fabric swatch submitted by STUDIO for actual samples. Manufacturer to provide STUDIO with shop drawings and prototype
 		sample pieces for approval prior to production. Manufacturer to work in conjunction with designer to ensure proper

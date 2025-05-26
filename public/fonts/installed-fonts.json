@@ -1,13 +1,8 @@
 {
-    "league spartan": {
-        "100": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/league_spartan_100_8933e8debcc5a0a3755ae38cb229ce29",
-        "200": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/league_spartan_200_a90cd3a7a71868f6add1a54ae5e86ef4",
-        "300": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/league_spartan_300_33fb5b04db8a4d64fc0e68c7d9190e24",
-        "normal": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/league_spartan_normal_231c58cdca0e6ed01df55cad7ba3e4a0",
-        "500": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/league_spartan_500_a2f2de8e6f4740d31b84e16bd617e66e",
-        "600": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/league_spartan_600_dc92555f9032d091f3f84775fbfa4d30",
-        "bold": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/league_spartan_bold_3a5a07b0de4835038894e957492d5ac2",
-        "800": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/league_spartan_800_7069c8a5bdb87b0b2c9ca31cdadf11ca",
-        "900": "league_spartan_900_db86e6e8ce891fdac0f90dc5ba76cd6c"
+    "open sans": {
+        "normal": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/open_sans_normal_b958458dfbb1b88d2a4b2ea3b213a844",
+        "600": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/open_sans_600_0bd66e347fc5e1ef1ea33d99f3b3a3de",
+        "bold": "C:\\xampp1\\htdocs\\ahsaan\\proposals-generator\\public\\\/fonts\/open_sans_bold_84fb6bfec46ae3de03ab89bd5f974ea4",
+        "800": "open_sans_800_2a1194b1d78090b842a357a474331da9"
     }
 }
