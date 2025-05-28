@@ -3,8 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proposal;
+use Mpdf\Mpdf;
+use Mpdf\Config\ConfigVariables;
+use Mpdf\Config\FontVariables;
 use Barryvdh\DomPDF\Facade\Pdf;
 
+
+// class ProposalController extends Controller
+// {
+//     public function showPdf(Proposal $proposal)
+//     {
+//         $fontDir = resource_path('fonts');
+
+//         $defaultConfig = (new ConfigVariables())->getDefaults();
+//         $defaultFontConfig = (new FontVariables())->getDefaults();
+
+//         $mpdf = new Mpdf([
+//             'format' => 'A4',
+//             'orientation' => 'P',
+//             'fontDir' => [resource_path('fonts')],
+//             'fontdata' => [
+//                 'opensanslight' => ['R' => 'OpenSans/OpenSans-Light.ttf'],
+//                 'opensans' => ['R' => 'OpenSans/OpenSans-Regular.ttf'],
+//                 'opensanssemibold' => ['R' => 'OpenSans/OpenSans-SemiBold.ttf'],
+//                 'opensansbold' => ['R' => 'OpenSans/OpenSans-Bold.ttf'],
+//             ],
+//             'default_font' => 'opensans',
+//         ]);
+
+//         $html = view('pdf.proposal', compact('proposal'))->render();
+//         $mpdf->WriteHTML($html);
+
+//         return response($mpdf->Output("proposal-{$proposal->id}.pdf", 'I'))
+//             ->header('Content-Type', 'application/pdf');
+//     }
+// }
+
+
+
+// DOMPDF
 class ProposalController extends Controller
 {
     // stream() = show in browser

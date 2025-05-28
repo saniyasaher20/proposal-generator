@@ -2,130 +2,21 @@
 <html lang="en">
 
 <head>
-	{{-- <style>
-		@font-face {
-			font-family: "League Spartan";
-			font-style: normal;
-			font-weight: 100;
-			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Thin.ttf') }}') format('truetype');
-		}
-
-		@font-face {
-			font-family: "League Spartan";
-			font-style: normal;
-			font-weight: 200;
-			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-ExtraLight.ttf') }}') format('truetype');
-		}
-
-		@font-face {
-			font-family: "League Spartan";
-			font-style: normal;
-			font-weight: 300;
-			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Light.ttf') }}') format('truetype');
-		}
-
-		@font-face {
-			font-family: "League Spartan";
-			font-style: normal;
-			font-weight: 400;
-			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Regular.ttf') }}') format('truetype');
-		}
-
-		@font-face {
-			font-family: "League Spartan";
-			font-style: normal;
-			font-weight: 500;
-			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Medium.ttf') }}') format('truetype');
-		}
-
-		@font-face {
-			font-family: "League Spartan";
-			font-style: normal;
-			font-weight: 600;
-			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-SemiBold.ttf') }}') format('truetype');
-		}
-
-		@font-face {
-			font-family: "League Spartan";
-			font-style: normal;
-			font-weight: 700;
-			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Bold.ttf') }}') format('truetype');
-		}
-
-		@font-face {
-			font-family: "League Spartan";
-			font-style: normal;
-			font-weight: 800;
-			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-ExtraBold.ttf') }}') format('truetype');
-		}
-
-		@font-face {
-			font-family: "League Spartan";
-			font-style: normal;
-			font-weight: 900;
-			src: url('{{ public_path('fonts/league_spartan/leagueSpartan-Black.ttf') }}') format('truetype');
-		}
-
-		body {
-			font-family: "League Spartan", sans-serif;
-		}
-	</style> --}}
-
 	<style>
-		@font-face {
-			font-family: "Open Sans";
-			font-style: normal;
-			font-weight: 400;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-Regular.ttf') }}') format('truetype');
+		.fw-light {
+			font-family: 'opensanslight';
 		}
 
-		@font-face {
-			font-family: "Open Sans";
-			font-style: normal;
-			font-weight: 600;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-SemiBold.ttf') }}') format('truetype');
+		.fw-normal {
+			font-family: 'opensans';
 		}
 
-		@font-face {
-			font-family: "Open Sans";
-			font-style: normal;
-			font-weight: 700;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-Bold.ttf') }}') format('truetype');
+		.fw-semibold {
+			font-family: 'opensanssemibold';
 		}
 
-		@font-face {
-			font-family: "Open Sans";
-			font-style: normal;
-			font-weight: 800;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-ExtraBold.ttf') }}') format('truetype');
-		}
-
-		/* @font-face {
-			font-family: "Open Sans";
-			font-style: italic;
-			font-weight: 400;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-Italic.ttf') }}') format('truetype');
-		}
-		@font-face {
-			font-family: "Open Sans";
-			font-style: italic;
-			font-weight: 600;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-SemiBoldItalic.ttf') }}') format('truetype');
-		}
-		@font-face {
-			font-family: "Open Sans";
-			font-style: italic;
-			font-weight: 700;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-BoldItalic.ttf') }}') format('truetype');
-		}
-		@font-face {
-			font-family: "Open Sans";
-			font-style: italic;
-			font-weight: 800;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-ExtraBoldItalic.ttf') }}') format('truetype');
-		} */
-		body {
-			font-family: "Open Sans", sans-serif;
+		.fw-bold {
+			font-family: 'opensansbold';
 		}
 	</style>
 	<meta charset="UTF-8">
@@ -135,7 +26,7 @@
 			color: #000;
 			margin: 0;
 			padding: 0;
-			line-height: 1;
+			line-height: 1.3;
 		}
 
 		.uppercase {
@@ -263,69 +154,61 @@
 			padding: 5px;
 			margin-top: 10px;
 		}
-
-		.fw-normal {
-			font-weight: 400;
-		}
-
-		.fw-semibold {
-			font-weight: 600;
-		}
-
-		.fw-bold {
-			font-weight: 700;
-		}
-
-		.fw-bolder {
-			font-weight: 800;
-		}
 	</style>
 
 </head>
 
 <body>
 	<!-- COVER PAGE -->
-	<div class="a4-size page-break" style="outline: 1px solid black;">
-		<div class="cover-page" style="position: relative; width: 100%; height: 100%;">
-			<!-- Centered intro -->
-			<div class="intro uppercase"
-				style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-				<img class="logo" src="{{ public_path('images/Houseofelm logo.png') }}" alt="House of Elm Logo"
-					style="margin-bottom: 50px;">
+	<div class="page-break" style="width: 210mm; height: 297mm; padding: 0; margin: 0; border: 1px solid black;">
+		<table style="width: 100%; height: 100%; border-collapse: collapse;width: 100%; height: 100%;">
+			<tr>
+				<td style="height: 225mm; text-align: center; vertical-align: middle;">
+					<!-- Centered intro -->
+					<div class="intro uppercase">
+						<img class="logo" src="{{ public_path('images/Houseofelm logo.png') }}" alt="House of Elm Logo"
+							style="max-width: 300px; height: auto;">
+						<br><br><br>
+						<div class="project-info fw-bold" style="font-size: 26px;line-height: 1.5;">
+							<div>Sarovar Portico,</div>
+							<div class="fw-semibold">Mumbai</div>
+						</div>
+						<br><br>
+						<div class="description fw-bold text-md" style="line-height:2">
+							<p>LOOSE FURNITURE</p>
+							<p>SERIES 3.00</p>
+							<p>ALL DAY DINING AND LIFT LOBBY</p>
+						</div>
 
-				<div class="project-info" style="margin-bottom: 50px; font-size: 26px; line-height: 1;">
-					<div class="fw-bold">Sarovar Portico,</div>
-					<div class="fw-semibold">Mumbai</div>
-				</div>
+					</div>
 
-				<div class="description fw-bold text-md" style="line-height: 1;">
-					LOOSE FURNITURE<br>
-					SERIES 3.00<br>
-					ALL DAY DINING AND LIFT LOBBY
-				</div>
-			</div>
-
-			<!-- Footer -->
-			<div class="footer footer-text fw-semibold" style="position: absolute; bottom: 5mm; right: 5mm;">
-				<div class="uppercase">
-					PREPARED BY:<br>HOUSE OF ELM<br>
-				</div>
-				403, 4<sup>th</sup> Floor, Trade World B-wing,<br>
-				Kamala Mills Compound, Lower Parel,<br>
-				Mumbai - 40013<br>
-				<div class="lowercase">
-					<a href="mailto:milouni@houseofelm.design">milouni@houseofelm.design</a><br>
-					<a href="mailto:swati@houseofelm.design">swati@houseofelm.design</a><br>
-					<a href="mailto:mahavira@houseofelm.design">mahavira@houseofelm.design</a>
-				</div>
-				Date of Issue: 31<sup>st</sup> MARCH 2025
-			</div>
-		</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: bottom; text-align: right; padding-right:5px;">
+					<!-- Footer -->
+					<div class="footer footer-text fw-semibold">
+						<div class="uppercase">
+							PREPARED BY:<br>HOUSE OF ELM<br>
+						</div>
+						403, 4<sup>th</sup> Floor, Trade World B-wing,<br>
+						Kamala Mills Compound, Lower Parel,<br>
+						Mumbai - 40013<br>
+						<div class="lowercase">
+							<a href="mailto:milouni@houseofelm.design">milouni@houseofelm.design</a><br>
+							<a href="mailto:swati@houseofelm.design">swati@houseofelm.design</a><br>
+							<a href="mailto:mahavira@houseofelm.design">mahavira@houseofelm.design</a>
+						</div>
+						Date of Issue: 31<sup>st</sup> MARCH 2025
+					</div>
+				</td>
+			</tr>
+		</table>
 	</div>
 
 
 	<!-- SPECIFICATION PAGE -->
-	<div class="a4-size page-break">
+	{{-- <div class="a4-size page-break">
 		<table class="table-borderless project-header">
 			<tr>
 				<td>
@@ -370,14 +253,16 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
+	</div> --}}
 
 	{{-- SINGLE ITEM PAGE --}}
 	<table class="equal-width table">
 		<tr>
-			<td><span class="fw-bold text-sm">PROJECT:</span> <br><span class="fw-bold text-md">SAROVAR PORTICO, MUMBAI</span></td>
+			<td><span class="fw-bold text-sm">PROJECT:</span> <br><span class="fw-bold text-md">SAROVAR PORTICO, MUMBAI</span>
+			</td>
 			<td><span class="fw-bold text-sm">MANUFACTURER'S DETAILS:</span> <br><span class="fw-bold text-md">To bid</span></td>
-			<td class="fw-bold text-md" style="text-align: center !important;">ITEM CODE:<br><span class="text-md">FF - 301</span>
+			<td class="fw-bold text-md" style="text-align: center !important;">ITEM CODE:<br><span class="text-md">FF -
+					301</span>
 			</td>
 		</tr>
 		<tr>
@@ -399,14 +284,14 @@
 					<tr>
 						<!-- LEFT: TEXT INFO -->
 						<td style="width: 50%; vertical-align: top; padding-right: 10px;">
-							Model number: Custom furniture<br>
-							Model name: Custom made furniture<br>
-							Width: 700 mm<br>
-							Length: 900 mm<br>
-							Height: 750 mm<br>
-							Material: Metal, wood and tile<br>
-							Details: Refer to FF&E shop drawing<br>
-							Note: Supplier to coordinate the items structure and stability.
+							MODEL NUMBER: CUSTOM FURNITURE<br>
+							MODEL NAME: CUSTOM MADE FURNITURE<br>
+							WIDTH: 700 MM<br>
+							LENGTH: 900 MM<br>
+							HEIGHT: 750 MM<br>
+							MATERIAL: METAL, WOOD AND TILE<br>
+							DETAILS: REFER TO FF&E SHOP DRAWING<br>
+							NOTE: SUPPLIER TO COORDINATE THE ITEMS STRUCTURE AND STABILITY.
 						</td>
 
 						<!-- RIGHT: IMAGE -->

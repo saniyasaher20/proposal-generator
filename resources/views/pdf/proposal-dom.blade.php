@@ -285,7 +285,7 @@
 
 <body>
 	<!-- COVER PAGE -->
-	<div class="a4-size page-break" style="outline: 1px solid black;">
+	{{-- <div class="a4-size page-break" style="outline: 1px solid black;">
 		<div class="cover-page" style="position: relative; width: 100%; height: 100%;">
 			<!-- Centered intro -->
 			<div class="intro uppercase"
@@ -321,11 +321,11 @@
 				Date of Issue: 31<sup>st</sup> MARCH 2025
 			</div>
 		</div>
-	</div>
+	</div> --}}
 
 
 	<!-- SPECIFICATION PAGE -->
-	<div class="a4-size page-break">
+	{{-- <div class="a4-size page-break">
 		<table class="table-borderless project-header">
 			<tr>
 				<td>
@@ -370,7 +370,7 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
+	</div> --}}
 
 	{{-- SINGLE ITEM PAGE --}}
 	<table class="equal-width table">
@@ -399,14 +399,14 @@
 					<tr>
 						<!-- LEFT: TEXT INFO -->
 						<td style="width: 50%; vertical-align: top; padding-right: 10px;">
-							Model number: Custom furniture<br>
-							Model name: Custom made furniture<br>
-							Width: 700 mm<br>
-							Length: 900 mm<br>
-							Height: 750 mm<br>
-							Material: Metal, wood and tile<br>
-							Details: Refer to FF&E shop drawing<br>
-							Note: Supplier to coordinate the items structure and stability.
+							MODEL NUMBER: CUSTOM FURNITURE<br>
+							MODEL NAME: CUSTOM MADE FURNITURE<br>
+							WIDTH: 700 MM<br>
+							LENGTH: 900 MM<br>
+							HEIGHT: 750 MM<br>
+							MATERIAL: METAL, WOOD AND TILE<br>
+							DETAILS: REFER TO FF&E SHOP DRAWING<br>
+							NOTE: SUPPLIER TO COORDINATE THE ITEMS STRUCTURE AND STABILITY.
 						</td>
 
 						<!-- RIGHT: IMAGE -->
