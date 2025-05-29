@@ -285,7 +285,7 @@
 
 <body>
 	<!-- COVER PAGE -->
-	<div class="a4-size page-break" style="outline: 1px solid black;">
+	{{-- <div class="a4-size page-break" style="outline: 1px solid black;">
 		<div class="cover-page" style="position: relative; width: 100%; height: 100%;">
 			<!-- Centered intro -->
 			<div class="intro uppercase"
@@ -321,17 +321,17 @@
 				Date of Issue: 31<sup>st</sup> MARCH 2025
 			</div>
 		</div>
-	</div>
+	</div> --}}
 
 
 	<!-- SPECIFICATION PAGE -->
-	<div class="a4-size page-break">
+	{{-- <div class="a4-size page-break">
 		<table class="table-borderless project-header">
 			<tr>
 				<td>
 					<b class="fw-bold text-md uppercase">SAROVAR PORTICO, MUMBAI <br>
-					<div class="fw-bold text-sm uppercase">PROJECT NUMBER: 20031<br>SCHEDULE FOR INTERIOR FINISHES</div>
-					<div class="text-sm">Date of Issue: 31<sup>st</sup> MARCH 2025</div>
+						<div class="fw-bold text-sm uppercase">PROJECT NUMBER: 20031<br>SCHEDULE FOR INTERIOR FINISHES</div>
+						<div class="text-sm">Date of Issue: 31<sup>st</sup> MARCH 2025</div>
 				</td>
 				<td style="text-align: right;">
 					<img src="{{ public_path('images/Houseofelm logo.png') }}" alt="House of Elm Logo" style="width: 200px;">
@@ -370,14 +370,16 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
+	</div> --}}
 
 	{{-- SINGLE ITEM PAGE --}}
 	<table class="equal-width table">
 		<tr>
-			<td><span class="fw-bold text-sm">PROJECT:</span> <br><span class="fw-bold text-md">SAROVAR PORTICO, MUMBAI</span></td>
+			<td><span class="fw-bold text-sm">PROJECT:</span> <br><span class="fw-bold text-md">SAROVAR PORTICO, MUMBAI</span>
+			</td>
 			<td><span class="fw-bold text-sm">MANUFACTURER'S DETAILS:</span> <br><span class="fw-bold text-md">To bid</span></td>
-			<td class="fw-bold text-md" style="text-align: center !important;">ITEM CODE:<br><span class="text-md">FF - 301</span>
+			<td class="fw-bold text-md" style="text-align: center !important;">ITEM CODE:<br><span class="text-md">FF -
+					301</span>
 			</td>
 		</tr>
 		<tr>
@@ -392,13 +394,16 @@
 			<td><span class="fw-bold text-sm">REVISION:</span> <br><span class="text-md"></span></td>
 		</tr>
 		<tr>
-			<td colspan="3">
-				SKETCH / PHOTOS / MATERIAL / SWATCH REFERENCE / SPECIFICATIONS / NOTES
-
-				<table class="table-borderless" style="width: 100%; margin-top: 10px;">
+			<td class="fw-bold uppercase" style="border-bottom:0;" colspan="3">SKETCH / PHOTOS / MATERIAL / SWATCH REFERENCE /
+				SPECIFICATIONS / NOTES</td>
+		</tr>
+		<tr>
+			<td style="border-top:0;" colspan="3">
+				<table style="width: 100%; margin:0;padding:0;">
+					{{-- INFO AND THUMBNAIL --}}
 					<tr>
 						<!-- LEFT: TEXT INFO -->
-						<td style="width: 50%; vertical-align: top; padding-right: 10px;">
+						<td style="width: 50%; vertical-align: top; padding-right: 10px;" colspan="3">
 							Model number: Custom furniture<br>
 							Model name: Custom made furniture<br>
 							Width: 700 mm<br>
@@ -410,9 +415,70 @@
 						</td>
 
 						<!-- RIGHT: IMAGE -->
-						<td style="width: 50%; vertical-align: top; text-align: right;">
+						<td style="width: 40%; vertical-align: top; text-align: right;" rowspan="2">
 							<img src="{{ public_path('images/item thumbnail 1.png') }}" alt="Furniture"
-								style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 2px;" />
+								style="max-height: 100%; max-width: 100%; width: 100%; object-fit: contain; border: 1px solid #ccc; padding: 2px; display: block; margin-left: auto;" />
+						</td>
+					</tr>
+
+					{{-- SWATCHES --}}
+					<tr>
+						<td style="text-align: left;" colspan="3">
+							<div style="padding-bottom:8px;display: inline-block; vertical-align: top; width: 100px; text-align: center;">
+								<div
+									style="height: 80px; width: 100px;
+									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
+								</div>
+								<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
+							</div>
+							<div style="display:inline-block; width:10px;"></div> <!-- spacer -->
+							<div style="padding-bottom:8px;display: inline-block; vertical-align: top; width: 100px; text-align: center;">
+								<div
+									style="height: 80px; width: 100px;
+									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
+								</div>
+								<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
+
+							</div>
+							<div style="display:inline-block; width:10px;"></div> <!-- spacer -->
+							<div style="padding-bottom:8px;display: inline-block; vertical-align: top; width: 100px; text-align: center;">
+								<div
+									style="height: 80px; width: 100px;
+									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
+								</div>
+								<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
+							</div>
+						</td>
+					</tr>
+
+					{{-- GENERAL NOTES --}}
+					<tr>
+						<td class="text-sm" style="line-height:1;letter-spacing:-0.2;" colspan="4">
+							<div class="fw-bold uppercase">GENERAL NOTES: </div>
+							<div>* Manufacturer to ensure support and stability of product.</div>
+							<div>* All construction methods and finishes must be of contract quality suitable for commercial and hospitality
+								use, of new high-grade material, clean and free from defects in material and workmanship/fabrication in
+								accordance
+								with House of Elm.</div>
+							<div>* All Local Codes for installation methods and practices must be observed.</div>
+						</td>
+					</tr>
+
+					{{-- CONTACT --}}
+					<tr>
+						<td colspan="3">
+							<div class="fw-bold uppercase">CONTACT PERSON:</div>
+							<div>TELEPHONE:</div>
+							<div>FACSIMILE:</div>
+							<div>E-MAIL:</div>
+						</td>
+						<td>
+							<div class="fw-bold uppercase">REQUIRED ITEMS FOR DESIGN APPROVAL PRIOR TO FABRICATION:</div>
+							<ul class="checklist">
+								<li>Shop Drawing</li>
+								<li>Finish Sample</li>
+								<li>Prototype</li>
+							</ul>
 						</td>
 					</tr>
 				</table>
