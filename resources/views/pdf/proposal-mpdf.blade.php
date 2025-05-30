@@ -360,7 +360,7 @@
 					<li>Finish Sample</li>
 					<li>Prototype</li>
 				</ul>
-			</td>
+			</td> 
 		</tr>
 	</table>
 
