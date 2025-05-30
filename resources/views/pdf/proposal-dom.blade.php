@@ -136,6 +136,7 @@
 			margin: 0;
 			padding: 0;
 			line-height: 1;
+			font-size: 13px;
 		}
 
 		.uppercase {
@@ -217,6 +218,10 @@
 			font-size: 12px;
 		}
 
+		.text-xs {
+			font-size: 10px;
+		}
+
 		.footer-text {
 			font-size: 13px;
 			text-align: right;
@@ -279,13 +284,40 @@
 		.fw-bolder {
 			font-weight: 800;
 		}
+
+		.img-sm {
+			width: 100px;
+			height: 80px;
+		}
+
+		.spacer {
+			width: 10px;
+			display: inline-block;
+		}
+
+		.img-sm-wrapper {
+			padding-bottom: 8px;
+			display: inline-block;
+			vertical-align: top;
+			width: 100px;
+			text-align: center;
+		}
+
+		.w-50 {
+			width: 50%;
+		}
+
+		.text-condensed {
+			line-height: 1;
+			letter-spacing: -0.2;
+		}
 	</style>
 
 </head>
 
 <body>
 	<!-- COVER PAGE -->
-	{{-- <div class="a4-size page-break" style="outline: 1px solid black;">
+	{{-- <section class="a4-size page-break" style="outline: 1px solid black;">
 		<div class="cover-page" style="position: relative; width: 100%; height: 100%;">
 			<!-- Centered intro -->
 			<div class="intro uppercase"
@@ -321,17 +353,17 @@
 				Date of Issue: 31<sup>st</sup> MARCH 2025
 			</div>
 		</div>
-	</div> --}}
+	</section> --}}
 
 
 	<!-- SPECIFICATION PAGE -->
-	{{-- <div class="a4-size page-break">
+	{{-- <section class="a4-size page-break">
 		<table class="table-borderless project-header">
 			<tr>
 				<td>
 					<b class="fw-bold text-md uppercase">SAROVAR PORTICO, MUMBAI <br>
-					<div class="fw-bold text-sm uppercase">PROJECT NUMBER: 20031<br>SCHEDULE FOR INTERIOR FINISHES</div>
-					<div class="text-sm">Date of Issue: 31<sup>st</sup> MARCH 2025</div>
+						<div class="fw-bold text-sm uppercase">PROJECT NUMBER: 20031<br>SCHEDULE FOR INTERIOR FINISHES</div>
+						<div class="text-sm">Date of Issue: 31<sup>st</sup> MARCH 2025</div>
 				</td>
 				<td style="text-align: right;">
 					<img src="{{ public_path('images/Houseofelm logo.png') }}" alt="House of Elm Logo" style="width: 200px;">
@@ -370,123 +402,255 @@
 				</tr>
 			</tbody>
 		</table>
-	</div> --}}
+	</section> --}}
 
 	{{-- SINGLE ITEM PAGE --}}
-	<table class="equal-width table">
-		<tr>
-			<td><span class="fw-bold text-sm">PROJECT:</span> <br><span class="fw-bold text-md">SAROVAR PORTICO, MUMBAI</span></td>
-			<td><span class="fw-bold text-sm">MANUFACTURER'S DETAILS:</span> <br><span class="fw-bold text-md">To bid</span></td>
-			<td class="fw-bold text-md" style="text-align: center !important;">ITEM CODE:<br><span class="text-md">FF - 301</span>
-			</td>
-		</tr>
-		<tr>
-			<td><span class="fw-bold text-sm">ITEM NAME:</span> <br><span class="text-md">Dining table</span></td>
-			<td><span class="fw-bold text-sm">DESCRIPTION:</span> <br><span class="text-md">Laminate with metal and tile top
-					dining table</span></td>
-			<td><span class="fw-bold text-sm">TOTAL QUANTITY:</span> <br><span class="text-md">22 nos</span></td>
-		</tr>
-		<tr>
-			<td><span class="fw-bold text-sm">AREA/LOCATION:</span> <br><span class="text-md">All day dining</span></td>
-			<td><span class="fw-bold text-sm">PRODUCT CODE:</span> <br><span class="text-md"></span></td>
-			<td><span class="fw-bold text-sm">REVISION:</span> <br><span class="text-md"></span></td>
-		</tr>
-		<tr>
-			<td colspan="3">
-				SKETCH / PHOTOS / MATERIAL / SWATCH REFERENCE / SPECIFICATIONS / NOTES
+	<section class="a4-size page-break">
+		<table class="equal-width table">
+			<tr>
+				<td><span class="fw-bold text-sm">PROJECT:</span> <br><span class="fw-bold text-md">SAROVAR PORTICO, MUMBAI</span>
+				</td>
+				<td><span class="fw-bold text-sm">MANUFACTURER'S DETAILS:</span> <br><span class="fw-bold text-md">To bid</span></td>
+				<td class="fw-bold text-md" style="text-align: center !important;">ITEM CODE:<br><span class="text-md">FF -
+						301</span>
+				</td>
+			</tr>
+			<tr>
+				<td><span class="fw-bold text-sm">ITEM NAME:</span> <br><span class="text-md">Dining table</span></td>
+				<td><span class="fw-bold text-sm">DESCRIPTION:</span> <br><span class="text-md">Laminate with metal and tile top
+						dining table</span></td>
+				<td><span class="fw-bold text-sm">TOTAL QUANTITY:</span> <br><span class="text-md">22 nos</span></td>
+			</tr>
+			<tr>
+				<td><span class="fw-bold text-sm">AREA/LOCATION:</span> <br><span class="text-md">All day dining</span></td>
+				<td><span class="fw-bold text-sm">PRODUCT CODE:</span> <br><span class="text-md"></span></td>
+				<td><span class="fw-bold text-sm">REVISION:</span> <br><span class="text-md"></span></td>
+			</tr>
+			<tr>
+				<td class="fw-bold uppercase" style="border-bottom:0;" colspan="3">SKETCH / PHOTOS / MATERIAL / SWATCH REFERENCE
+					/
+					SPECIFICATIONS / NOTES</td>
+			</tr>
+			<tr>
+				<td style="border-top:0;" colspan="3">
+					<table class="table-borderless" style="width: 100%; margin:0;padding:0;">
+						{{-- INFO AND THUMBNAIL --}}
+						<tr>
+							<!-- LEFT: TEXT INFO -->
+							<td style="width: 50%; vertical-align: top; padding-right: 10px;" colspan="3">
+								Model number: Custom furniture<br>
+								Model name: Custom made furniture<br>
+								Width: 700 mm<br>
+								Length: 900 mm<br>
+								Height: 750 mm<br>
+								Material: Metal, wood and tile<br>
+								Details: Refer to FF&E shop drawing<br>
+								Note: Supplier to coordinate the items structure and stability.
+							</td>
 
-				<table class="table-borderless" style="width: 100%; margin-top: 10px;">
-					<tr>
-						<!-- LEFT: TEXT INFO -->
-						<td style="width: 50%; vertical-align: top; padding-right: 10px;">
-							MODEL NUMBER: CUSTOM FURNITURE<br>
-							MODEL NAME: CUSTOM MADE FURNITURE<br>
-							WIDTH: 700 MM<br>
-							LENGTH: 900 MM<br>
-							HEIGHT: 750 MM<br>
-							MATERIAL: METAL, WOOD AND TILE<br>
-							DETAILS: REFER TO FF&E SHOP DRAWING<br>
-							NOTE: SUPPLIER TO COORDINATE THE ITEMS STRUCTURE AND STABILITY.
-						</td>
+							<!-- RIGHT: IMAGE -->
+							<td style="width: 40%; vertical-align: top; text-align: right;" rowspan="2">
+								<img src="{{ public_path('images/item thumbnail 1.png') }}" alt="Furniture"
+									style="max-height: 100%; max-width: 100%; width: 100%; object-fit: contain; border: 1px solid #ccc; padding: 2px; display: block; margin-left: auto;" />
+							</td>
+						</tr>
 
-						<!-- RIGHT: IMAGE -->
-						<td style="width: 50%; vertical-align: top; text-align: right;">
-							<img src="{{ public_path('images/item thumbnail 1.png') }}" alt="Furniture"
-								style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 2px;" />
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
+						{{-- SWATCHES --}}
+						<tr>
+							<td style="text-align: left;" colspan="3">
+								<div class="img-sm-wrapper">
+									<div class="img-sm"
+										style="
+									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
+									</div>
+									<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
+								</div>
+								<div class="spacer"></div> <!-- spacer -->
+								<div class="img-sm-wrapper">
+									<div class="img-sm"
+										style="
+									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
+									</div>
+									<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
 
-		{{-- <tr>
-			<td style="width: 65%; vertical-align: top;">
+								</div>
+								<div class="spacer"></div> <!-- spacer -->
+								<div class="img-sm-wrapper">
+									<div class="img-sm"
+										style="
+									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
+									</div>
+									<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
+								</div>
+							</td>
+						</tr>
 
-			</td>
-			<td style="width: 35%; text-align: center;">
-				<img class="spec-image" src="{{ public_path('images/item thumbnail 1.png') }}" alt="Furniture">
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<div class="section-heading">SKETCH / PHOTOS / MATERIAL / SWATCH REFERENCE / SPECIFICATIONS / NOTES</div>
-				<table class="table-borderless" style="width: 100%; margin-top: 5px;">
-					<tr style="text-align: center;">
-						<td>
-							<img class="material-swatch" src="{{ public_path('images/tile-finish.png') }}"><br>
-							TILE FINISH <br>TL - 02
-						</td>
-						<td>
-							<img class="material-swatch" src="{{ public_path('images/metal-finish.png') }}"><br>
-							METAL FINISH <br>MT - 02
-						</td>
-						<td>
-							<img class="material-swatch" src="{{ public_path('images/wood-finish.png') }}"><br>
-							SOLID WOOD FINISH
-						</td>
-					</tr>
-				</table>
+						{{-- GENERAL NOTES --}}
+						<tr>
+							<td class="text-condensed text-sm" colspan="4">
+								<div class="fw-bold uppercase">GENERAL NOTES: </div>
+								<div>* Manufacturer to ensure support and stability of product.</div>
+								<div>* All construction methods and finishes must be of contract quality suitable for commercial and hospitality
+									use, of new high-grade material, clean and free from defects in material and workmanship/fabrication in
+									accordance
+									with House of Elm.</div>
+								<div>* All Local Codes for installation methods and practices must be observed.</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		{{-- CONTACT --}}
+		<table class="table">
+			<tr>
+				<td class="fw-bold text-sm uppercase" style="width: 60%; border-top:none;">
+					<div>CONTACT PERSON:</div>
+					<div>TELEPHONE:</div>
+					<div>FACSIMILE:</div>
+					<div>E-MAIL:</div>
+					<div>WEBSITE</div>
+				</td>
+				<td style="border-top:none;">
+					<div class="fw-bold text-sm uppercase">REQUIRED ITEMS FOR DESIGN APPROVAL PRIOR TO FABRICATION:</div>
+					<ul class="text-sm" style="line-height: 1;margin-left:-20px;margin-top: 0px;">
+						<li>Shop Drawing</li>
+						<li>Finish Sample</li>
+						<li>Prototype</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="text-condensed text-xs" colspan="2">
+					<div class="fw-bold uppercase">REMARKS: </div>
+					This is a preliminary information sheet only and not for construction purposes. Refer to material reference boards
+					& fabric swatch submitted by STUDIO for actual samples. Manufacturer to provide STUDIO with shop drawings and
+					prototype sample pieces for approval prior to production. Manufacturer to work in conjunction with designer to
+					ensure proper proportions & design intent. The furniture, fittings & equipment pieces in this specification book is
+					for design intent only.
+				</td>
+			</tr>
+		</table>
+	</section>
 
-				<br>
-				General Notes: <br>
-				<ul class="checklist">
-					<li>* Manufacturer to ensure support and stability of product.</li>
-					<li>* All construction methods and finishes must be of contract quality suitable for commercial and hospitality
-						use, of new high-grade material, clean and free from defects in material and workmanship/fabrication in accordance
-						with House of Elm.</li>
-					<li>* All Local Codes for installation methods and practices must be observed.</li>
-				</ul>
-			</td>
-		</tr> --}}
-	</table>
+	{{-- DRAWING PAGE --}}
+	<section class="a4-size page-break" style="outline: 1px solid black; position: relative;">
+		<table class="table" style="width: 100%; height: 98%;">
+			<tr style="vertical-align: middle;">
+				<td style="text-align: center;" colspan="2">
+					<div class="img-sm-wrapper">
+						<div class="img-sm"
+							style="
+									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
+						</div>
+						<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="img-sm-wrapper">
+						<div class="img-sm"
+							style="
+									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
+						</div>
+						<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
 
-	<table class="table" style="margin-top: 10px;">
-		<tr>
-			<td style="width: 50%;">
-				CONTACT PERSON: <br><br>
-				TELEPHONE: <br>
-				FACSIMILE: <br>
-				E-MAIL:
-			</td>
-			<td style="width: 50%;">
-				REQUIRED ITEMS FOR DESIGN APPROVAL PRIOR TO FABRICATION:
-				<ul class="checklist">
-					<li>Shop Drawing</li>
-					<li>Finish Sample</li>
-					<li>Prototype</li>
-				</ul>
-			</td>
-		</tr>
-	</table>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="img-sm-wrapper">
+						<div class="img-sm"
+							style="
+									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
+						</div>
+						<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
 
-	<div class="remarks">
-		REMARKS: <br>
-		This is a preliminary information sheet only and not for construction purposes. Refer to material reference boards &
-		fabric swatch submitted by STUDIO for actual samples. Manufacturer to provide STUDIO with shop drawings and prototype
-		sample pieces for approval prior to production. Manufacturer to work in conjunction with designer to ensure proper
-		proportions & design intent. The furniture, fittings & equipment pieces in this specification book is for design
-		intent only.
-	</div>
+					<div class="img-sm-wrapper">
+						<img src="{{ public_path('images/item thumbnail 1.png') }}" alt="Dining Table" style="width: 100px;">
+					</div>
+				</td>
+			</tr>
+
+			<tr style="vertical-align: middle; text-align: center;">
+				<td class="w-50">
+					<img src="{{ public_path('images/item thumbnail 1.png') }}" alt="Dining Table">
+				</td>
+				<td>
+					<img src="{{ public_path('images/item thumbnail 1.png') }}" alt="Dining Table">
+				</td>
+			</tr>
+			<tr style="vertical-align: middle; text-align: center;">
+				<td class="w-50">
+					<img src="{{ public_path('images/item thumbnail 1.png') }}" alt="Dining Table">
+				</td>
+				<td>
+					<img src="{{ public_path('images/item thumbnail 1.png') }}" alt="Dining Table">
+				</td>
+			</tr>
+		</table>
+
+		<div style="position: absolute; bottom: 0; width: 100%;">
+			<table class="table" style="width: 100%;">
+				<tr>
+					<td style="text-align: right;" colspan="4">
+						<div class="text-condensed text-xs" style="display: inline-block; border: 1px solid #000; padding: 1px 4px;">
+							Note: Manufacturer to provide detailed <br> shop drawings prior to construction
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="text-sm" style="text-align: center;" colspan="4">
+						DESIGN DEVELOPMENT ONLY - NOT INTENDED FOR CONSTRUCTION
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img class="logo" src="{{ public_path('images/Houseofelm logo.png') }}" alt="House of Elm Logo"
+							style="width:150px;">
+					</td>
+					<td class="text-condensed text-xs">HOUSE OF ELM TEMPLATE VERSION 2023</td>
+					<td style="vertical-align: top;" rowspan="2">
+						<div class="text-condensed text-xs">PROJECT NAME:</div> <b>SAROVAR PORTICO, MUMBAI</b> <br><br>
+						<div class="text-condensed text-xs"> ADDRESS:</div> <b>MUMBAI, INDIA</b> <br><br>
+					</td>
+					<td>
+						<table class="table-borderless text-condensed text-xs" cellspacing="0" cellpadding="0">
+							<tr>
+								<td><b>PROJECT #:</b></td>
+								<td><b>20031</b></td>
+							</tr>
+							<tr>
+								<td><b>Issue date:</b></td>
+								<td><!-- Add issue date here --></td>
+							</tr>
+							<tr>
+								<td><b>Studio principal:</b></td>
+								<td>Milouni Mehta</td>
+							</tr>
+							<tr>
+								<td><b>Drawn by:</b></td>
+								<td>Mahavira Gupta</td>
+							</tr>
+							<tr>
+								<td><b>Checked by:</b></td>
+								<td>Milouni Mehta</td>
+							</tr>
+							<tr>
+								<td><b>Scale:</b></td>
+								<td>As shown</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+
+	</section>
 </body>
 
 </html>
