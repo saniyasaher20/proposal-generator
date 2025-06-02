@@ -3,18 +3,18 @@
 		<!-- Centered intro -->
 		<div class="intro uppercase"
 			style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-			<img class="logo" src="{{ public_path('images/Houseofelm logo.png') }}" alt="House of Elm Logo"
+			<img class="logo" src="{{ public_path('storage/' . $company->logo_path) }}" alt="House of Elm Logo"
 				style="margin-bottom: 50px;">
 
 			<div class="project-info" style="margin-bottom: 50px; font-size: 26px; line-height: 1;">
-				<div class="fw-bold">Sarovar Portico,</div>
-				<div class="fw-semibold">Mumbai</div>
+				<div class="fw-bold">{{ $proposal->project_name }},</div>
+				<div class="fw-semibold"> {{ $proposal->project_location }}</div>
 			</div>
 
 			<div class="description fw-bold text-md" style="line-height: 1;">
-				LOOSE FURNITURE<br>
-				SERIES 3.00<br>
-				ALL DAY DINING AND LIFT LOBBY
+				{{ $proposal->spec_name }}<br>
+				SERIES {{ $proposal->spec_series }}<br>
+				{{ $proposal->spec_area }}
 			</div>
 		</div>
 
@@ -23,15 +23,13 @@
 			<div class="uppercase">
 				PREPARED BY:<br>HOUSE OF ELM<br>
 			</div>
-			403, 4<sup>th</sup> Floor, Trade World B-wing,<br>
-			Kamala Mills Compound, Lower Parel,<br>
-			Mumbai - 40013<br>
+			{!! nl2br(e($company->address)) !!}<br>
 			<div class="lowercase">
-				<a href="mailto:milouni@houseofelm.design">milouni@houseofelm.design</a><br>
-				<a href="mailto:swati@houseofelm.design">swati@houseofelm.design</a><br>
-				<a href="mailto:mahavira@houseofelm.design">mahavira@houseofelm.design</a>
+				@foreach ($company->emails as $email)
+					<a href="mailto:{{ $email['value'] }}">{{ $email['value'] }}</a><br>
+				@endforeach
 			</div>
-			Date of Issue: 31<sup>st</sup> MARCH 2025
+			Date of Issue: {{ $proposal->issue_date->format('d F Y') }}
 		</div>
 	</div>
 </section>

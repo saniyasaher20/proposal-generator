@@ -9,7 +9,7 @@
 
 <body>
 	<!-- COVER PAGE -->
-	@include('pdf.partials.cover-page')
+	{{-- @include('pdf.partials.cover-page') --}}
 
 	{{-- ITEM LIST PAGE --}}
 	@include('pdf.partials.specification-page')
@@ -21,5 +21,4 @@
 	@include('pdf.partials.drawing-page')
 
 </body>
-
 </html>

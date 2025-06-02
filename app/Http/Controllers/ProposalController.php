@@ -7,6 +7,7 @@ use Mpdf\Mpdf;
 use Mpdf\Config\ConfigVariables;
 use Mpdf\Config\FontVariables;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\CompanySetting;
 
 
 // class ProposalController extends Controller
@@ -48,16 +49,19 @@ class ProposalController extends Controller
     // download() = force download
     public function showPdf(Proposal $proposal)
     {
-        // Just pass dummy data for now or skip
+        $company = CompanySetting::first();
+
         $pdf = Pdf::loadView('pdf.proposal', [
-            'proposal' => $proposal,
-        ]) ->setOption([
+                'proposal' => $proposal,
+                'company' => $company
+            ])
+            ->setOption([
                 'fontDir' => public_path('/fonts'),
                 'fontCache' => public_path('/fonts'),
-                'defaultFont' => 'Poppins'])
+                'defaultFont' => 'Poppins'
+            ])
             ->setPaper('A4', 'portrait')
-            ->setWarnings(false) // Disable warnings for missing fonts
-        ;
+            ->setWarnings(false); // Disable warnings for missing fonts
 
         // Stream the PDF in browser
         return $pdf->stream("proposal-{$proposal->id}.pdf");

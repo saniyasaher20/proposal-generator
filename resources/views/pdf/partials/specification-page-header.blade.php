@@ -1,12 +1,14 @@
 <table class="table-borderless project-header">
 	<tr>
 		<td>
-			<b class="fw-bold text-md uppercase">SAROVAR PORTICO, MUMBAI <br>
-				<div class="fw-bold text-sm uppercase">PROJECT NUMBER: 20031<br>SCHEDULE FOR INTERIOR FINISHES</div>
-				<div class="text-sm">Date of Issue: 31<sup>st</sup> MARCH 2025</div>
+			<b class="fw-bold text-md uppercase">{{ $proposal->project_name }}, {{ $proposal->project_location }} <br>
+				<div class="fw-bold text-sm uppercase">PROJECT NUMBER: {{ $proposal->project_code }}<br>SCHEDULE FOR INTERIOR
+					FINISHES</div>
+				<div class="text-sm"> Date of Issue: {{ $proposal->issue_date->format('d F Y') }}
+				</div>
 		</td>
 		<td style="text-align: right;">
-			<img src="{{ public_path('images/Houseofelm logo.png') }}" alt="House of Elm Logo" style="width: 200px;">
+			<img src="{{ public_path('storage/' . $company->logo_path) }}" alt="House of Elm Logo" style="width: 200px;">
 		</td>
 	</tr>
 	<tr>

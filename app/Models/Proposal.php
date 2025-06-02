@@ -5,24 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 class Proposal extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProposalFactory> */
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_id',
         'project_name',
         'project_code',
-        'client_name',
-        'issue_date',
+        // 'client_name',
+        'issue_date', // Date - default - current date
         'revision_label',
-        'status',
-        'notes'
+        'status', // Enum - default - 'draft'
+
+        'project_location',
+        'spec_name',
+        'spec_series',
+        'spec_area',
     ];
 
-    // Cast JSON fields
     protected $casts = [
         'issue_date' => 'date',
     ];

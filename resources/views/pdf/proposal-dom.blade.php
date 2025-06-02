@@ -489,12 +489,7 @@
 						<tr>
 							<td class="text-condensed text-sm" colspan="4">
 								<div class="fw-bold uppercase">GENERAL NOTES: </div>
-								<div>* Manufacturer to ensure support and stability of product.</div>
-								<div>* All construction methods and finishes must be of contract quality suitable for commercial and hospitality
-									use, of new high-grade material, clean and free from defects in material and workmanship/fabrication in
-									accordance
-									with House of Elm.</div>
-								<div>* All Local Codes for installation methods and practices must be observed.</div>
+								{!! nl2br(e($company->general_notes)) !!}
 							</td>
 						</tr>
 					</table>

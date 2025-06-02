@@ -20,6 +20,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class ProposalResource extends Resource
 {
@@ -32,7 +33,7 @@ class ProposalResource extends Resource
         return $form
             ->schema([
                 Hidden::make('user_id')
-                    ->default(fn() => auth()->id())
+                    ->default(fn() => Auth::id())
                     ->required(),
 
                 TextInput::make('project_name')
@@ -42,97 +43,98 @@ class ProposalResource extends Resource
                 TextInput::make('project_code')
                     ->unique()
                     ->required()
+                    ->unique(ignoreRecord: true) //Rule::unique('proposals', 'project_code')->ignore($this->record->id)
                     ->maxLength(50),
-
-                TextInput::make('client_name')
-                    ->required()
-                    ->maxLength(255),
 
                 DatePicker::make('issue_date')
                     ->required()
                     ->default(now()),
 
                 TextInput::make('revision_label')
-                    ->maxLength(50)
-                    ->placeholder('e.g. REV-1')
-                    ->default(null),
+                    ->placeholder('e.g. REV-1'),
 
                 Select::make('status')
                     ->required()
-                    ->default('pending')
+                    ->default('draft')
                     ->options([
-                        'pending'  => 'Pending',
+                        'draft' => 'Draft',
+                        'pending' => 'Pending',
                         'approved' => 'Approved',
                         'rejected' => 'Rejected',
                     ]),
 
-                Textarea::make('notes')
-                    ->columnSpanFull(),
+                TextInput::make('project_location')->label('Project Location'),
+                TextInput::make('spec_name')->label('Specification Name'),
+                TextInput::make('spec_series')->label('Specification Series'),
+                TextInput::make('spec_area')->label('Specification Area'),
 
-                // Repeater for items 
-                Repeater::make('proposalItems')
-                    ->relationship('items')      // links to Proposal::items() relation
+                // Furniture Items
+                Repeater::make('items')
+                    ->relationship('items')
                     ->label('Furniture / Artwork Items')
-                    ->collapsible()               // allow collapsing each item panel
-                    ->defaultItems(1)             // start with one blank item
+                    ->collapsible()
+                    ->defaultItems(1)
+                    ->columns(3)
                     ->schema([
-                        TextInput::make('code')
-                            ->label('Item Code')
-                            ->required()
-                            ->maxLength(50),
-
-                        TextInput::make('name')
-                            ->label('Item Name')
-                            ->required()
-                            ->maxLength(255),
-
-                        Textarea::make('description')
-                            ->label('Description')
-                            ->rows(2),
-
-                        TextInput::make('quantity')
-                            ->label('Quantity')
-                            ->required()
-                            ->numeric(),
-
-                        TextInput::make('section')
-                            ->label('Location / Section')
-                            ->required()
-                            ->maxLength(255),
+                        TextInput::make('item_code')->required()->label('Code'),
+                        TextInput::make('item_name')->required()->label('Name'),
+                        Textarea::make('item_description')->label('Description')->columnSpanFull(),
+                        TextInput::make('item_quantity')->numeric()->required()->label('Quantity'),
+                        TextInput::make('location')->label('Location / Section'),
+                        TextInput::make('item_category')->label('Category'),
+                        TextInput::make('materials')->label('Materials'),
 
                         FileUpload::make('thumbnail_path')
                             ->label('Thumbnail')
                             ->image()
-                            ->required()
-                            ->directory('proposals/thumbnails')
-                            // ->visibility('public')  // ← For shared hosting
-                            ->disk('public'), // ← Crucial,
-
-                        FileUpload::make('materials')
-                            ->label('Material Swatches')
-                            ->image()
-                            ->multiple()               // allow multiple files
-                            ->reorderable()       // let users drag to reorder swatches
-                            ->directory('proposals/materials')
                             ->disk('public')
-                            // ->visibility('public')  // ← For shared hosting
-                            ->panelLayout('grid'),    // optional: display as a grid
+                            ->directory('proposals/thumbnails')
+                            ->required(),
 
                         FileUpload::make('drawings')
-                            ->label('Technical Drawings')
-                            ->image()                  // or ->file() if PDFs/DWG
+                            ->label('Drawings')
+                            ->image()
                             ->multiple()
                             ->reorderable()
-                            ->directory('proposals/drawings')
                             ->disk('public')
-                            // ->visibility('public')
-                            ->panelLayout('stacked'),
+                            ->directory('proposals/drawings'),
 
-                        Textarea::make('remarks')
-                            ->label('Remarks')
-                            ->rows(2),
+
+                        Textarea::make('manufacturer_details')->label('Manufacturer Details'),
+                        TextInput::make('product_code')->label('Product Code'),
+                        TextInput::make('revision')->label('Revision'),
+                        TextInput::make('model_name')->label('Model Name'),
+                        TextInput::make('model_number')->label('Model Number'),
+
+                        TextInput::make('item_width')->numeric()->label('Width (mm)'),
+                        TextInput::make('item_length')->numeric()->label('Length (mm)'),
+                        TextInput::make('item_height')->numeric()->label('Height (mm)'),
+
+                        TextInput::make('item_material')->label('Materials'),
+                        Textarea::make('item_details')->label('Details'),
+                        Textarea::make('item_note')
+                            ->label('Note')
+                            ->default('Supplier to coordinate the items structure and stability.'),
+
+                        // Swatches
+                        Repeater::make('swatches')
+                            ->relationship('swatches')
+                            ->label('Swatches')
+                            ->schema([
+                                FileUpload::make('image_path')
+                                    ->label('Image')
+                                    ->image()
+                                    ->disk('public')
+                                    ->directory('proposals/swatches'),
+
+                                TextInput::make('name')->label('Name'),
+                                TextInput::make('code')->label('Code'),
+                            ])
+                            ->columns(3)
+                            ->collapsible()
+                            ->defaultItems(1)
+                            ->columnSpanFull(),
                     ])
-                    ->columns(2)   // two columns per item for compactness
                     ->columnSpanFull(),
             ]);
     }
