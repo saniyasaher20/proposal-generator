@@ -13,7 +13,7 @@ class ProposalItem extends Model
     protected $fillable = [
         'proposal_id', // Foreign key to Proposal
         'item_code', // Unique code for the item
-        'item_name',    
+        'item_name',
         'item_description',
         'item_quantity',
         'location',
@@ -26,7 +26,7 @@ class ProposalItem extends Model
 
         'item_category',
         'manufacturer_details',
-        'product_code', 
+        'product_code',
         'revision',
         'model_name',
         'model_number',
@@ -51,5 +51,27 @@ class ProposalItem extends Model
     public function swatches()
     {
         return $this->hasMany(Swatch::class);
+    }
+
+    /**
+     * Mutator: clean up item_category before saving.
+     */
+    public function setItemCategoryAttribute($value)
+    {
+        if (is_null($value)) {
+            $this->attributes['item_category'] = null;
+            return;
+        }
+
+        // 1) Convert any sequence of whitespace to a single space
+        $collapsed = preg_replace('/\s+/', ' ', $value);
+
+        // 2) Trim leading/trailing spaces
+        $trimmed = trim($collapsed);
+
+        // 3) Normalize casing to UPPERCASE
+        $formattedCategory = mb_strtoupper($trimmed, 'UTF-8');
+
+        $this->attributes['item_category'] = $formattedCategory;
     }
 }

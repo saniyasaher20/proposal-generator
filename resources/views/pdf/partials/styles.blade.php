@@ -1,4 +1,8 @@
 <style>
+	:root {
+		--light-gray: #f0f0f0;
+	}
+
 	@font-face {
 		font-family: "Open Sans";
 		font-style: normal;
@@ -91,7 +95,7 @@
 
 	.table th,
 	.table td {
-		outline: 0.5px solid #000;
+		border: 0.5px solid #000;
 		padding: 4px 6px;
 	}
 
@@ -120,9 +124,15 @@
 	}
 
 	.table-borderless td {
-		outline: none !important;
+		border: none !important;
 		vertical-align: top;
 		text-align: left;
+	}
+
+	table.single-item-info-table td,
+	table.single-item-info-table th,
+	{
+	padding: auto 0;
 	}
 
 	.logo {
@@ -248,7 +258,7 @@
 	.table-project-info td {
 		padding: 0px 5px !important;
 		margin: 0 !important;
-		outline: none;
+		border: none;
 	}
 
 	.drawing-page-footer table.parent-table th,

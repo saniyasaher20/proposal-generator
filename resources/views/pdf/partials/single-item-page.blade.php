@@ -1,127 +1,176 @@
+@foreach ($proposal->items as $item)
 	<section class="a4-size page-break">
-		<table class="equal-width table">
+		{{-- ITEM HEADER TABLE --}}
+		<table class="equal-width table ">
 			<tr>
-				<td><span class="fw-bold text-sm">PROJECT:</span> <br><span class="fw-bold text-md">SAROVAR PORTICO, MUMBAI</span>
+				{{-- Project / Location --}}
+				<td>
+					<span class="fw-bold text-sm">PROJECT:</span><br>
+					<span class="fw-bold text-md">{{ $proposal->project_name }}, {{ $proposal->project_location }}</span>
 				</td>
-				<td><span class="fw-bold text-sm">MANUFACTURER'S DETAILS:</span> <br><span class="fw-bold text-md">To bid</span></td>
-				<td class="fw-bold text-md" style="text-align: center !important;">ITEM CODE:<br><span class="text-md">FF -
-						301</span>
+
+				{{-- Manufacturer's Details --}}
+				<td>
+					<span class="fw-bold text-sm">MANUFACTURER'S DETAILS:</span><br>
+					<span class="fw-bold text-md">{{ $item->manufacturer_details }}</span>
+				</td>
+
+				{{-- Item Code --}}
+				<td class="fw-bold text-md" style="text-align: center !important;">
+					ITEM CODE:<br>
+					<span class="text-md">{{ $item->item_code }}</span>
 				</td>
 			</tr>
+
 			<tr>
-				<td><span class="fw-bold text-sm">ITEM NAME:</span> <br><span class="text-md">Dining table</span></td>
-				<td><span class="fw-bold text-sm">DESCRIPTION:</span> <br><span class="text-md">Laminate with metal and tile top
-						dining table</span></td>
-				<td><span class="fw-bold text-sm">TOTAL QUANTITY:</span> <br><span class="text-md">22 nos</span></td>
+				{{-- Item Name --}}
+				<td>
+					<span class="fw-bold text-sm">ITEM NAME:</span><br>
+					<span class="text-md">{{ $item->item_name }}</span>
+				</td>
+
+				{{-- Description --}}
+				<td>
+					<span class="fw-bold text-sm">DESCRIPTION:</span><br>
+					<span class="text-md">{{ $item->item_description }}</span>
+				</td>
+
+				{{-- Quantity --}}
+				<td>
+					<span class="fw-bold text-sm">TOTAL QUANTITY:</span><br>
+					<span class="text-md">{{ $item->item_quantity }} nos</span>
+				</td>
 			</tr>
+
 			<tr>
-				<td><span class="fw-bold text-sm">AREA/LOCATION:</span> <br><span class="text-md">All day dining</span></td>
-				<td><span class="fw-bold text-sm">PRODUCT CODE:</span> <br><span class="text-md"></span></td>
-				<td><span class="fw-bold text-sm">REVISION:</span> <br><span class="text-md"></span></td>
+				{{-- Location / Section --}}
+				<td>
+					<span class="fw-bold text-sm">AREA/LOCATION:</span><br>
+					<span class="text-md">{{ $item->location }}</span>
+				</td>
+
+				{{-- Product Code --}}
+				<td>
+					<span class="fw-bold text-sm">PRODUCT CODE:</span><br>
+					<span class="text-md">{{ $item->product_code }}</span>
+				</td>
+
+				{{-- Revision --}}
+				<td>
+					<span class="fw-bold text-sm">REVISION:</span><br>
+					<span class="text-md">{{ $item->revision }}</span>
+				</td>
 			</tr>
+
 			<tr>
-				<td class="fw-bold uppercase" style="border-bottom:0;" colspan="3">SKETCH / PHOTOS / MATERIAL / SWATCH REFERENCE
-					/
-					SPECIFICATIONS / NOTES</td>
+				<td class="fw-bold uppercase" style="border-bottom: none;" colspan="3">
+					SKETCH / PHOTOS / MATERIAL / SWATCH REFERENCE / SPECIFICATIONS / NOTES
+				</td>
 			</tr>
+
 			<tr>
-				<td style="border-top:0;" colspan="3">
-					<table class="table-borderless" style="width: 100%; margin:0;padding:0;">
+				<td style="border-top: none;" colspan="3">
+					<table class="table-borderless single-item-info-table" style="width: 100%; margin:0;padding:0;" cellpadding="0">
 						{{-- INFO AND THUMBNAIL --}}
 						<tr>
-							<!-- LEFT: TEXT INFO -->
-							<td style="width: 50%; vertical-align: top; padding-right: 10px;" colspan="3">
-								Model number: Custom furniture<br>
-								Model name: Custom made furniture<br>
-								Width: 700 mm<br>
-								Length: 900 mm<br>
-								Height: 750 mm<br>
-								Material: Metal, wood and tile<br>
-								Details: Refer to FF&E shop drawing<br>
-								Note: Supplier to coordinate the items structure and stability.
+							{{-- Left: textual info (model, dimensions, etc.) --}}
+							<td class="fw-bold" style="width: 50%; vertical-align: top; padding-right: 10px;" colspan="3">
+								Model number: {{ $item->model_number }}<br>
+								Model name: {{ $item->model_name }}<br>
+								Width: {{ $item->item_width }} mm<br>
+								Length: {{ $item->item_length }} mm<br>
+								Height: {{ $item->item_height }} mm<br>
+								Material: {{ $item->item_material }}<br>
+								Details: {{ $item->item_details }}<br>
+								Note: {{ $item->item_note }}
 							</td>
 
-							<!-- RIGHT: IMAGE -->
+							{{-- Right: thumbnail image --}}
 							<td style="width: 40%; vertical-align: top; text-align: right;" rowspan="2">
-								<img src="{{ public_path('images/item thumbnail 1.png') }}" alt="Furniture"
-									style="max-height: 100%; max-width: 100%; width: 100%; object-fit: contain; border: 1px solid #ccc; padding: 2px; display: block; margin-left: auto;" />
+								@if ($item->thumbnail_path)
+									<img src="{{ public_path('storage/' . $item->thumbnail_path) }}" alt="Furniture"
+										style="max-height: 100%; max-width: 100%; width: 100%; object-fit: contain; border: 1px solid #ccc; padding: 2px; display: block; margin-left: auto;">
+								@else
+									{{-- If no thumbnail, you could leave an empty block or a placeholder --}}
+									<div
+										style="width: 100%; height: 100%; border: 1px solid #ccc; text-align: center; line-height: 80px; color: #999;">
+										No Image
+									</div>
+								@endif
 							</td>
 						</tr>
 
-						{{-- SWATCHES --}}
+						{{-- SWATCHES ROW --}}
 						<tr>
 							<td style="text-align: left;" colspan="3">
-								<div class="img-sm-wrapper">
-									<div class="img-sm"
-										style="
-									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
+								@foreach ($item->swatches as $swatch)
+									<div class="img-sm-wrapper">
+										<div class="img-sm"
+											style="
+									 background: url('{{ public_path('storage/' . $swatch->image_path) }}') center center/cover no-repeat;">
+										</div>
+										<div style="font-size: 12px; margin-top: 1px;">{{ $swatch->name }}<br>{{ $swatch->code }}</div>
 									</div>
-									<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
-								</div>
-								<div class="spacer"></div> <!-- spacer -->
-								<div class="img-sm-wrapper">
-									<div class="img-sm"
-										style="
-									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
-									</div>
-									<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
-
-								</div>
-								<div class="spacer"></div> <!-- spacer -->
-								<div class="img-sm-wrapper">
-									<div class="img-sm"
-										style="
-									background: url('{{ public_path('images/swatches (2).png') }}') center center/cover no-repeat;">
-									</div>
-									<div style="font-size: 12px; margin-top: 1px;">TILE FINISH <br> TL- 02</div>
-								</div>
+									<div class="spacer"></div> <!-- spacer -->
+								@endforeach
 							</td>
 						</tr>
 
-						{{-- GENERAL NOTES --}}
+						{{-- GENERAL NOTES (Company-level) --}}
 						<tr>
 							<td class="text-condensed text-sm" colspan="4">
-								<div class="fw-bold uppercase">GENERAL NOTES: </div>
-								<div>* Manufacturer to ensure support and stability of product.</div>
-								<div>* All construction methods and finishes must be of contract quality suitable for commercial and hospitality
-									use, of new high-grade material, clean and free from defects in material and workmanship/fabrication in
-									accordance
-									with House of Elm.</div>
-								<div>* All Local Codes for installation methods and practices must be observed.</div>
+								<div class="fw-bold uppercase">GENERAL NOTES:</div>
+								@if ($company->general_notes)
+									{{-- If general_notes contains line breaks, convert them to <br> --}}
+									{!! nl2br(e($company->general_notes)) !!}
+								@else
+									<div>-</div>
+								@endif
 							</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 		</table>
-		{{-- CONTACT --}}
+
+		{{-- CONTACT & REMARKS TABLE --}}
 		<table class="table">
 			<tr>
-				<td class="fw-bold text-sm uppercase" style="width: 60%; border-top:none;">
-					<div>CONTACT PERSON:</div>
-					<div>TELEPHONE:</div>
-					<div>FACSIMILE:</div>
-					<div>E-MAIL:</div>
-					<div>WEBSITE</div>
+				{{-- Left: Contact info --}}
+				<td class="text-sm" style="width: 60%; border-top: none;">
+					<div><span class="fw-bold uppercase">CONTACT PERSON:</span> {{ $company->contact_name }}</div>
+					<div><span class="fw-bold uppercase">TELEPHONE:</span> {{ $company->contact_number }}</div>
+					<div><span class="fw-bold uppercase">FACSIMILE:</span> {{ $company->facsimile }}</div>
+					<div><span class="fw-bold uppercase">E-MAIL:</span>
+						@if (!empty($company->emails) && isset($company->emails[0]['value']))
+							<a href="mailto:{{ $company->emails[0]['value'] }}">{{ $company->emails[0]['value'] }}</a>
+						@endif
+					</div>
+					<div><span class="fw-bold uppercase">WEBSITE:</span> {{ $company->website }}</div>
 				</td>
-				<td style="border-top:none;">
+
+				{{-- Right: Static “Required Items” --}}
+				<td style="border-top: none; vertical-align: top;">
 					<div class="fw-bold text-sm uppercase">REQUIRED ITEMS FOR DESIGN APPROVAL PRIOR TO FABRICATION:</div>
-					<ul class="text-sm" style="line-height: 1;margin-left:-20px;margin-top: 0px;">
+					<ul class="text-sm" style="line-height: 1; margin-left: -20px; margin-top: 0px;">
 						<li>Shop Drawing</li>
 						<li>Finish Sample</li>
 						<li>Prototype</li>
 					</ul>
 				</td>
 			</tr>
+
 			<tr>
+				{{-- Bottom: Company-level “Remarks” --}}
 				<td class="text-condensed text-xs" colspan="2">
-					<div class="fw-bold uppercase">REMARKS: </div>
-					This is a preliminary information sheet only and not for construction purposes. Refer to material reference boards
-					& fabric swatch submitted by STUDIO for actual samples. Manufacturer to provide STUDIO with shop drawings and
-					prototype sample pieces for approval prior to production. Manufacturer to work in conjunction with designer to
-					ensure proper proportions & design intent. The furniture, fittings & equipment pieces in this specification book is
-					for design intent only.
+					<div class="fw-bold uppercase">REMARKS:</div>
+					@if ($company->remarks)
+						{!! nl2br(e($company->remarks)) !!}
+					@else
+						<div>-</div>
+					@endif
 				</td>
 			</tr>
 		</table>
 	</section>
+@endforeach

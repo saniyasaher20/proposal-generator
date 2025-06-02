@@ -81,7 +81,27 @@ class ProposalResource extends Resource
                         Textarea::make('item_description')->label('Description')->columnSpanFull(),
                         TextInput::make('item_quantity')->numeric()->required()->label('Quantity'),
                         TextInput::make('location')->label('Location / Section'),
-                        TextInput::make('item_category')->label('Category'),
+                        // TextInput::make('item_category')->label('Category'),
+
+                        TextInput::make('item_category')
+                            ->label('Category')
+                            ->required()
+                            ->reactive() // so we can modify state immediately
+                            ->afterStateUpdated(function (callable $set, $state) {
+                                if ($state === null) {
+                                    $set('item_category', null);
+                                    return;
+                                }
+
+                                // Collapse multiple whitespace into one,
+                                // then trim, then Title Case:
+                                $collapsed = preg_replace('/\s+/', ' ', $state);
+                                $trimmed  = trim($collapsed);
+                                $titleCased = mb_convert_case($trimmed, MB_CASE_TITLE, 'UTF-8');
+
+                                $set('item_category', $titleCased);
+                            }),
+
                         TextInput::make('materials')->label('Materials'),
 
                         FileUpload::make('thumbnail_path')

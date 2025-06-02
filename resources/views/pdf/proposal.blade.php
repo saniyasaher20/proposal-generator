@@ -12,7 +12,7 @@
 	{{-- @include('pdf.partials.cover-page') --}}
 
 	{{-- ITEM LIST PAGE --}}
-	@include('pdf.partials.specification-page')
+	{{-- @include('pdf.partials.specification-page') --}}
 
 	{{-- SINGLE ITEM PAGE --}}
 	@include('pdf.partials.single-item-page')

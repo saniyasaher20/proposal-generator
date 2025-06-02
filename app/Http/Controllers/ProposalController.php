@@ -58,12 +58,12 @@ class ProposalController extends Controller
             ->setOption([
                 'fontDir' => public_path('/fonts'),
                 'fontCache' => public_path('/fonts'),
-                'defaultFont' => 'Poppins'
+                // 'defaultFont' => 'Poppins'
             ])
             ->setPaper('A4', 'portrait')
             ->setWarnings(false); // Disable warnings for missing fonts
 
         // Stream the PDF in browser
-        return $pdf->stream("proposal-{$proposal->id}.pdf");
+        return $pdf->stream("{$proposal->project_code}-{$proposal->project_name}-{$proposal->project_location}-{$proposal->id}.pdf");
     }
 }
