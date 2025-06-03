@@ -18,7 +18,7 @@ class ProposalItem extends Model
         'item_quantity',
         'location',
         'thumbnail_path',
-        'materials', //text like METAL, WOOD AND TILE
+        // 'materials', //text like METAL, WOOD AND TILE
         'drawings', // JSON (e.g., [{"name": "drawing1.jpg", "path": "/path/to/drawing1.jpg"}, ...])
         // 'specs', 
         // 'remarks',

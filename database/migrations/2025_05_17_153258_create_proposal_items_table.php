@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->integer('item_quantity')->default(1);
             $table->string('location')->nullable();
             $table->string('thumbnail_path')->nullable();
-            $table->text('materials')->nullable();
+            // $table->text('materials')->nullable();
             $table->json('drawings')->nullable();
 
             $table->string('item_category')->nullable();

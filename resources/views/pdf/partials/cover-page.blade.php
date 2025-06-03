@@ -26,7 +26,7 @@
 			{!! nl2br(e($company->address)) !!}<br>
 			<div class="lowercase">
 				@foreach ($company->emails as $email)
-					<a href="mailto:{{ $email['value'] }}">{{ $email['value'] }}</a><br>
+					<a href="mailto:{{ $email }}">{{ $email }}</a><br>
 				@endforeach
 			</div>
 			Date of Issue: {{ $proposal->issue_date->format('d F Y') }}

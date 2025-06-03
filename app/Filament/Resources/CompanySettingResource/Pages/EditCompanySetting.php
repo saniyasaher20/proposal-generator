@@ -10,10 +10,13 @@ class EditCompanySetting extends EditRecord
 {
     protected static string $resource = CompanySettingResource::class;
 
-    protected function getHeaderActions(): array
+   protected function getHeaderActions(): array
     {
         return [
-            // Actions\DeleteAction::make(),
+            $this->getSaveFormAction()
+                ->formId('form')
+                ->label('Save Changes (Ctrl + S)')
+                ->keyBindings(['ctrl+s']),
         ];
     }
 }

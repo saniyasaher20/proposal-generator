@@ -1,7 +1,7 @@
 @foreach ($proposal->items as $item)
 	<section class="a4-size page-break">
 		{{-- ITEM HEADER TABLE --}}
-		<table class="equal-width table ">
+		<table class="equal-width table">
 			<tr>
 				{{-- Project / Location --}}
 				<td>
@@ -142,8 +142,8 @@
 					<div><span class="fw-bold uppercase">TELEPHONE:</span> {{ $company->contact_number }}</div>
 					<div><span class="fw-bold uppercase">FACSIMILE:</span> {{ $company->facsimile }}</div>
 					<div><span class="fw-bold uppercase">E-MAIL:</span>
-						@if (!empty($company->emails) && isset($company->emails[0]['value']))
-							<a href="mailto:{{ $company->emails[0]['value'] }}">{{ $company->emails[0]['value'] }}</a>
+						@if (!empty($company->emails) && isset($company->emails[0]))
+							<a href="mailto:{{ $company->emails[0] }}">{{ $company->emails[0] }}</a>
 						@endif
 					</div>
 					<div><span class="fw-bold uppercase">WEBSITE:</span> {{ $company->website }}</div>
@@ -173,4 +173,6 @@
 			</tr>
 		</table>
 	</section>
+	{{-- DRAWING PAGE --}}
+	@include('pdf.partials.drawing-page')
 @endforeach

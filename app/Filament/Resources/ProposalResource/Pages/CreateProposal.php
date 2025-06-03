@@ -12,6 +12,7 @@ use App\Filament\Resources\ProposalResource;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
+use Filament\Actions;
 
 class CreateProposal extends CreateRecord
 {
@@ -24,7 +25,7 @@ class CreateProposal extends CreateRecord
         // Skip autosave for non-form-related Livewire properties
         if (! str_starts_with($property, 'data.')) return;
         // Log::info('Autosave triggered on property: ' . $property);
-        // $this->autosaveDraft();
+        $this->autosaveDraft();
     }
 
     public function autosaveDraft()
@@ -40,6 +41,16 @@ class CreateProposal extends CreateRecord
         } catch (\Throwable $e) {
             // Log::error('Autosave failed: ' . $e->getMessage());
         }
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            $this->getSaveFormAction()
+                ->formId('form')
+                ->label('Save Changes (Ctrl + S)')
+                ->keyBindings(['ctrl+s']),
+        ];
     }
 }
 

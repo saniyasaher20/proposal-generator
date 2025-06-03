@@ -21,6 +21,7 @@ class CompanySettingResource extends Resource
     protected static ?string $model = CompanySetting::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -64,15 +65,15 @@ class CompanySettingResource extends Resource
 
                 Repeater::make('emails')
                     ->label('Email Addresses')
-                    ->default([
-                        'milouni@houseofelm.design',
-                        'swati@houseofelm.design',
-                        'mahavira@houseofelm.design',
-                    ])
-                    ->schema([
+                    ->simple(
                         TextInput::make('value')
                             ->label('')
                             ->email(),
+                    )
+                    ->default([
+                        ['value' => 'milouni@houseofelm.design'],
+                        ['value' => 'swati@houseofelm.design'],
+                        ['value' => 'mahavira@houseofelm.design'],
                     ])
                     ->columns(1)
                     ->minItems(1)
@@ -117,7 +118,7 @@ class CompanySettingResource extends Resource
         $id = \App\Models\CompanySetting::first()?->id ?? '1';
         return [
             'index' => Pages\ListCompanySettings::route('/' . $id),
-            'create' => Pages\CreateCompanySetting::route('/create'),
+            // 'create' => Pages\CreateCompanySetting::route('/create'),
             'edit' => Pages\EditCompanySetting::route('/{record}/edit'),
         ];
     }

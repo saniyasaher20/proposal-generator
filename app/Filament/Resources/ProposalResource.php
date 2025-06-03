@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProposalResource\Pages;
 use App\Models\Proposal;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Form;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
@@ -13,6 +14,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -36,37 +39,47 @@ class ProposalResource extends Resource
                     ->default(fn() => Auth::id())
                     ->required(),
 
-                TextInput::make('project_name')
-                    ->required()
-                    ->maxLength(255),
+                Grid::make(3)
+                    ->schema([
+                        TextInput::make('project_name')
+                            ->required()
+                            ->maxLength(255),
 
-                TextInput::make('project_code')
-                    ->unique()
-                    ->required()
-                    ->unique(ignoreRecord: true) //Rule::unique('proposals', 'project_code')->ignore($this->record->id)
-                    ->maxLength(50),
+                        TextInput::make('project_location')->label('Project Location'),
 
-                DatePicker::make('issue_date')
-                    ->required()
-                    ->default(now()),
+                        TextInput::make('project_code')
+                            ->unique()
+                            ->required()
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(50),
+                    ]),
+                Grid::make(3)
+                    ->schema([
+                        DatePicker::make('issue_date')
+                            ->required()
+                            ->default(now()),
 
-                TextInput::make('revision_label')
-                    ->placeholder('e.g. REV-1'),
+                        TextInput::make('revision_label')
+                            ->placeholder('e.g. REV-1'),
 
-                Select::make('status')
-                    ->required()
-                    ->default('draft')
-                    ->options([
-                        'draft' => 'Draft',
-                        'pending' => 'Pending',
-                        'approved' => 'Approved',
-                        'rejected' => 'Rejected',
+                        Select::make('status')
+                            ->required()
+                            ->default('draft')
+                            ->options([
+                                'draft' => 'Draft',
+                                'pending' => 'Pending',
+                                'approved' => 'Approved',
+                                'rejected' => 'Rejected',
+                            ]),
                     ]),
 
-                TextInput::make('project_location')->label('Project Location'),
-                TextInput::make('spec_name')->label('Specification Name'),
-                TextInput::make('spec_series')->label('Specification Series'),
-                TextInput::make('spec_area')->label('Specification Area'),
+                Grid::make(3)
+                    ->schema([
+                        TextInput::make('spec_name')->label('Specification Name'),
+                        TextInput::make('spec_series')->label('Specification Series'),
+                        TextInput::make('spec_area')->label('Specification Area'),
+                    ]),
+
 
                 // Furniture Items
                 Repeater::make('items')
@@ -74,88 +87,125 @@ class ProposalResource extends Resource
                     ->label('Furniture / Artwork Items')
                     ->collapsible()
                     ->defaultItems(1)
+                    ->collapsed()
                     ->columns(3)
                     ->schema([
-                        TextInput::make('item_code')->required()->label('Code'),
-                        TextInput::make('item_name')->required()->label('Name'),
-                        Textarea::make('item_description')->label('Description')->columnSpanFull(),
-                        TextInput::make('item_quantity')->numeric()->required()->label('Quantity'),
-                        TextInput::make('location')->label('Location / Section'),
+
+                        Grid::make(4)->schema([
+
+
+                            Grid::make(1)->schema([
+                                TextInput::make('item_code')->required()->label('Code'),
+                                TextInput::make('item_name')->required()->label('Name'),
+                                TextInput::make('manufacturer_details')->label('Manufacturer Details'),
+                            ])->columnSpan(1),
+
+                            Grid::make(1)->schema([
+                                TextInput::make('item_description')->label('Description'),
+
+                                TextInput::make('item_category')
+                                    ->label('Category')
+                                    ->required()
+                                    ->reactive() // so we can modify state immediately
+                                    ->afterStateUpdated(function (callable $set, $state) {
+                                        if ($state === null) {
+                                            $set('item_category', null);
+                                            return;
+                                        }
+
+                                        // Collapse multiple whitespace into one,
+                                        // then trim, then Title Case:
+                                        $collapsed = preg_replace('/\s+/', ' ', $state);
+                                        $trimmed  = trim($collapsed);
+                                        $titleCased = mb_convert_case($trimmed, MB_CASE_TITLE, 'UTF-8');
+
+                                        $set('item_category', $titleCased);
+                                    }),
+                                TextInput::make('product_code')->label('Product Code'),
+
+                            ])->columnSpan(1),
+
+                            Grid::make(1)->schema([
+                                TextInput::make('location')->label('Area/Location'),
+                                TextInput::make('item_quantity')->numeric()->required()->label('Quantity'),
+                                TextInput::make('revision')->label('Revision'),
+                            ])->columnSpan(1),
+
+
+                            FileUpload::make('thumbnail_path')
+                                ->label('Thumbnail')
+                                ->image()
+                                ->disk('public')
+                                ->directory('proposals/thumbnails')
+                                ->required()
+                                ->openable(),
+
+                        ]),
+
                         // TextInput::make('item_category')->label('Category'),
 
-                        TextInput::make('item_category')
-                            ->label('Category')
-                            ->required()
-                            ->reactive() // so we can modify state immediately
-                            ->afterStateUpdated(function (callable $set, $state) {
-                                if ($state === null) {
-                                    $set('item_category', null);
-                                    return;
-                                }
+                        // TextInput::make('materials')->label('Materials'),
 
-                                // Collapse multiple whitespace into one,
-                                // then trim, then Title Case:
-                                $collapsed = preg_replace('/\s+/', ' ', $state);
-                                $trimmed  = trim($collapsed);
-                                $titleCased = mb_convert_case($trimmed, MB_CASE_TITLE, 'UTF-8');
+                        Section::make([
+                            Grid::make(4)->schema([
+                                TextInput::make('model_name')->label('Model Name'),
+                                TextInput::make('model_number')->label('Model Number'),
 
-                                $set('item_category', $titleCased);
-                            }),
+                                TextInput::make('item_width')->numeric()->label('Width (mm)'),
+                                TextInput::make('item_length')->numeric()->label('Length (mm)'),
+                                TextInput::make('item_height')->numeric()->label('Height (mm)'),
 
-                        TextInput::make('materials')->label('Materials'),
+                                TextInput::make('item_material')->label('Materials'),
+                                TextInput::make('item_details')->label('Details'),
+                                TextInput::make('item_note')
+                                    ->label('Note')
+                                    ->default('Supplier to coordinate the items structure and stability.'),
 
-                        FileUpload::make('thumbnail_path')
-                            ->label('Thumbnail')
-                            ->image()
-                            ->disk('public')
-                            ->directory('proposals/thumbnails')
-                            ->required(),
-
-                        FileUpload::make('drawings')
-                            ->label('Drawings')
-                            ->image()
-                            ->multiple()
-                            ->reorderable()
-                            ->disk('public')
-                            ->directory('proposals/drawings'),
+                            ]),
+                        ])->columnSpan(4),
 
 
-                        Textarea::make('manufacturer_details')->label('Manufacturer Details'),
-                        TextInput::make('product_code')->label('Product Code'),
-                        TextInput::make('revision')->label('Revision'),
-                        TextInput::make('model_name')->label('Model Name'),
-                        TextInput::make('model_number')->label('Model Number'),
+                        Grid::make(3)->schema([
 
-                        TextInput::make('item_width')->numeric()->label('Width (mm)'),
-                        TextInput::make('item_length')->numeric()->label('Length (mm)'),
-                        TextInput::make('item_height')->numeric()->label('Height (mm)'),
+                            FileUpload::make('drawings')
+                                ->label('Drawings')
+                                ->image()
+                                ->multiple()
+                                ->reorderable()
+                                ->disk('public')
+                                ->directory('proposals/drawings')
+                                ->panelLayout('grid')
+                                ->openable()
+                                ->columnSpan(1),
 
-                        TextInput::make('item_material')->label('Materials'),
-                        Textarea::make('item_details')->label('Details'),
-                        Textarea::make('item_note')
-                            ->label('Note')
-                            ->default('Supplier to coordinate the items structure and stability.'),
+                            // Swatches
+                            Repeater::make('swatches')
+                                ->relationship('swatches')
+                                ->label('Swatches')
+                                ->schema([
+                                    FileUpload::make('image_path')
+                                        ->label('Image')
+                                        ->image()
+                                        ->disk('public')
+                                        ->directory('proposals/swatches')
+                                        ->panelLayout('square')
+                                        ->openable()
+                                        ->imagePreviewHeight('80'),
 
-                        // Swatches
-                        Repeater::make('swatches')
-                            ->relationship('swatches')
-                            ->label('Swatches')
-                            ->schema([
-                                FileUpload::make('image_path')
-                                    ->label('Image')
-                                    ->image()
-                                    ->disk('public')
-                                    ->directory('proposals/swatches'),
-
-                                TextInput::make('name')->label('Name'),
-                                TextInput::make('code')->label('Code'),
-                            ])
-                            ->columns(3)
-                            ->collapsible()
-                            ->defaultItems(1)
-                            ->columnSpanFull(),
+                                    TextInput::make('name')->label('Name'),
+                                    TextInput::make('code')->label('Code'),
+                                ])
+                                ->itemLabel(fn(array $state): ?string => isset($state['name']) ? $state['name'] : null)
+                                ->columns(3)
+                                ->collapsible()
+                                ->reorderable()
+                                ->defaultItems(1)
+                                ->columnSpan(2),
+                        ])
                     ])
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->reorderable()
+                    ->itemLabel(fn(array $state): ?string => isset($state['item_name'], $state['item_category']) ? $state['item_name'] . ' (' . $state['item_category']  . ')' : null),
             ]);
     }
 
