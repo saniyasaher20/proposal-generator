@@ -176,7 +176,8 @@ class ProposalResource extends Resource
                                 ->directory('proposals/drawings')
                                 ->panelLayout('grid')
                                 ->openable()
-                                ->columnSpan(1),
+                                ->columnSpan(1)
+                                 ->extraAttributes(['class' => 'image-preview-width']),
 
                             // Swatches
                             Repeater::make('swatches')
@@ -190,15 +191,16 @@ class ProposalResource extends Resource
                                         ->directory('proposals/swatches')
                                         ->panelLayout('square')
                                         ->openable()
-                                        ->imagePreviewHeight('80'),
+                                        ->imagePreviewHeight('80')->columnSpan(1),
 
-                                    TextInput::make('name')->label('Name'),
-                                    TextInput::make('code')->label('Code'),
+                                    Grid::make(1)->schema([
+                                        TextInput::make('name')->label('Name'),
+                                        TextInput::make('code')->label('Code'),
+                                    ])->columnSpan(2)
                                 ])
                                 ->itemLabel(fn(array $state): ?string => isset($state['name']) ? $state['name'] : null)
                                 ->columns(3)
                                 ->collapsible()
-                                ->reorderable()
                                 ->defaultItems(1)
                                 ->columnSpan(2),
                         ])
