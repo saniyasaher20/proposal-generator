@@ -115,9 +115,9 @@ class CompanySettingResource extends Resource
 
     public static function getPages(): array
     {
-        $id = \App\Models\CompanySetting::first()?->id ?? '1';
+        // $id = \App\Models\CompanySetting::first()?->id ?? '1';
         return [
-            'index' => Pages\ListCompanySettings::route('/' . $id),
+            // 'index' => Pages\ListCompanySettings::route('/' . $id),
             // 'create' => Pages\CreateCompanySetting::route('/create'),
             'edit' => Pages\EditCompanySetting::route('/{record}/edit'),
         ];
