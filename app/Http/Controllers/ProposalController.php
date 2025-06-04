@@ -8,7 +8,7 @@ use Mpdf\Config\ConfigVariables;
 use Mpdf\Config\FontVariables;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\CompanySetting;
-
+use Illuminate\Support\Facades\Schema;
 
 // class ProposalController extends Controller
 // {
@@ -49,12 +49,13 @@ class ProposalController extends Controller
     // download() = force download
     public function showPdf(Proposal $proposal)
     {
-        $company = CompanySetting::first();
-
+        if (Schema::hasTable('company_settings')) {
+                  $company = CompanySetting::first();
+        }
         $pdf = Pdf::loadView('pdf.proposal', [
-                'proposal' => $proposal,
-                'company' => $company
-            ])
+            'proposal' => $proposal,
+            'company' => $company
+        ])
             ->setOption([
                 'fontDir' => public_path('/fonts'),
                 'fontCache' => public_path('/fonts'),
