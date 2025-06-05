@@ -37,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
             // ->font('Poppins')
             ->darkMode(false) // To disable dark mode switching
             ->login()
+            ->sidebarCollapsibleOnDesktop()
             ->colors([
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,

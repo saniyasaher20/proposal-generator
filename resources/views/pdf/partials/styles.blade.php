@@ -1,71 +1,20 @@
 <style>
 	:root {
 		--light-gray: #f0f0f0;
+		--page-margin: 1cm;
 	}
 
-	@font-face {
-		font-family: "Open Sans";
-		font-style: normal;
-		font-weight: 400;
-		src: url('{{ public_path('fonts/open_sans/OpenSans-Regular.ttf') }}') format('truetype');
+	a {
+		color: #0000EE;
+		text-decoration: underline;
 	}
 
-	@font-face {
-		font-family: "Open Sans";
-		font-style: normal;
-		font-weight: 600;
-		src: url('{{ public_path('fonts/open_sans/OpenSans-SemiBold.ttf') }}') format('truetype');
-	}
-
-	@font-face {
-		font-family: "Open Sans";
-		font-style: normal;
-		font-weight: 700;
-		src: url('{{ public_path('fonts/open_sans/OpenSans-Bold.ttf') }}') format('truetype');
-	}
-
-	@font-face {
-		font-family: "Open Sans";
-		font-style: normal;
-		font-weight: 800;
-		src: url('{{ public_path('fonts/open_sans/OpenSans-ExtraBold.ttf') }}') format('truetype');
-	}
-
-	/* @font-face {
-			font-family: "Open Sans";
-			font-style: italic;
-			font-weight: 400;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-Italic.ttf') }}') format('truetype');
-		}
-		@font-face {
-			font-family: "Open Sans";
-			font-style: italic;
-			font-weight: 600;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-SemiBoldItalic.ttf') }}') format('truetype');
-		}
-		@font-face {
-			font-family: "Open Sans";
-			font-style: italic;
-			font-weight: 700;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-BoldItalic.ttf') }}') format('truetype');
-		}
-		@font-face {
-			font-family: "Open Sans";
-			font-style: italic;
-			font-weight: 800;
-			src: url('{{ public_path('fonts/open_sans/OpenSans-ExtraBoldItalic.ttf') }}') format('truetype');
-		} */
-	body {
-		font-family: "Open Sans", sans-serif;
-	}
-</style>
-<style>
 	body {
 		color: #000;
 		margin: 0;
 		padding: 0;
-		line-height: 1;
 		font-size: 13px;
+		font-family: "Open Sans", sans-serif;
 	}
 
 	.uppercase {
@@ -76,12 +25,7 @@
 		text-transform: lowercase;
 	}
 
-	.a4-size {
-		margin: 0 auto;
-		box-sizing: border-box;
-		position: relative;
-		overflow: hidden;
-	}
+
 
 	.page-break {
 		page-break-after: always;
@@ -242,7 +186,7 @@
 	}
 
 	.text-condensed {
-		line-height: 1;
+		/* line-height: 1; */
 		letter-spacing: -0.2;
 	}
 
@@ -266,6 +210,4 @@
 		padding: 10px 10px;
 		margin-bottom: 20px;
 	}
-
-	
 </style>

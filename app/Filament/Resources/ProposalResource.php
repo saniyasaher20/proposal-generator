@@ -177,7 +177,7 @@ class ProposalResource extends Resource
                                 ->panelLayout('grid')
                                 ->openable()
                                 ->columnSpan(1)
-                                 ->extraAttributes(['class' => 'image-preview-width']),
+                                ->extraAttributes(['class' => 'image-preview-width']),
 
                             // Swatches
                             Repeater::make('swatches')
@@ -259,6 +259,12 @@ class ProposalResource extends Resource
                     ->url(fn(Proposal $record) => route('filament.admin.resources.proposals.previewPdf', $record))
                     ->openUrlInNewTab(),
 
+                Tables\Actions\Action::make('htmlPreview')
+                    ->label('HTML Preview')
+                    ->icon('heroicon-o-code-bracket')
+                    ->url(fn(Proposal $record) => route('filament.admin.resources.proposals.htmlPreview', $record))
+                    ->openUrlInNewTab(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -284,6 +290,7 @@ class ProposalResource extends Resource
             'view' => Pages\ViewProposal::route('/{record}'),
             'edit' => Pages\EditProposal::route('/{record}/edit'),
             'previewPdf' => Pages\ProposalPreviewPdf::route('/{record}/preview'),
+            'htmlPreview' => Pages\HtmlPreview::route('/{record}/htmlpreview'),
         ];
     }
 

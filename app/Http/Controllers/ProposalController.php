@@ -49,16 +49,15 @@ class ProposalController extends Controller
     // download() = force download
     public function showPdf(Proposal $proposal)
     {
-        $company = CompanySetting::first();
-
         $pdf = Pdf::loadView('pdf.proposal', [
-                'proposal' => $proposal,
-                'company' => $company
-            ])
+            'proposal' => $proposal,
+            'company' => CompanySetting::first(),
+            'usePublicPath' => true, // <== Tells Blade to use public_path()
+        ])
             ->setOption([
                 'fontDir' => public_path('/fonts'),
                 'fontCache' => public_path('/fonts'),
-                // 'defaultFont' => 'Poppins'
+                'defaultFont' => 'Open Sans',
             ])
             ->setPaper('A4', 'portrait')
             ->setWarnings(false); // Disable warnings for missing fonts
@@ -66,4 +65,16 @@ class ProposalController extends Controller
         // Stream the PDF in browser
         return $pdf->stream("{$proposal->project_code}-{$proposal->project_name}-{$proposal->project_location}-{$proposal->id}.pdf");
     }
+
+    // public function htmlPreview(Proposal $proposal)
+    // {
+    //     $company = CompanySetting::first();
+
+    //     // If you want to allow editing before generating, 
+    //     // you can pass the proposal and company into the view.
+    //     return view('pdf.html-preview', [
+    //         'proposal' => $proposal,
+    //         'company'  => $company,
+    //     ]);
+    // }
 }

@@ -3,15 +3,16 @@
 		<!-- Centered intro -->
 		<div class="intro uppercase"
 			style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-			<img class="logo" src="{{ public_path('storage/' . $company->logo_path) }}" alt="House of Elm Logo"
-				style="margin-bottom: 50px;">
+			<img class="logo"
+				src="{{ $usePublicPath ? public_path('storage/' . $company->logo_path) : asset('storage/' . $company->logo_path) }}"
+				alt="House of Elm Logo" style="margin-bottom: 50px;">
 
-			<div class="project-info" style="margin-bottom: 50px; font-size: 26px; line-height: 1;">
+			<div class="project-info" style="margin-bottom: 50px; font-size: 26px;">
 				<div class="fw-bold">{{ $proposal->project_name }},</div>
 				<div class="fw-semibold"> {{ $proposal->project_location }}</div>
 			</div>
 
-			<div class="description fw-bold text-md" style="line-height: 1;">
+			<div class="description fw-bold text-md">
 				{{ $proposal->spec_name }}<br>
 				SERIES {{ $proposal->spec_series }}<br>
 				{{ $proposal->spec_area }}
