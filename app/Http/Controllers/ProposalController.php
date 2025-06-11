@@ -49,6 +49,9 @@ class ProposalController extends Controller
     // download() = force download
     public function showPdf(Proposal $proposal)
     {
+        // Always load fresh data
+        $proposal = Proposal::with('items')->find($proposal->id);
+        
         $pdf = Pdf::loadView('pdf.proposal', [
             'proposal' => $proposal,
             'company' => CompanySetting::first(),

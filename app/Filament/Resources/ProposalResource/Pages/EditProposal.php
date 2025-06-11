@@ -26,4 +26,8 @@ class EditProposal extends EditRecord
 
         ];
     }
+    protected function afterSave(): void
+    {
+        $this->dispatch('proposal-updated');
+    }
 }

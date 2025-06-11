@@ -18,12 +18,12 @@ class HtmlPreview extends Page
     {
         $this->record = $record->load('items');
     }
-    public function getViewData(): array
-    {
-        return [
-            'proposal' => $this->record,
-            'company' => CompanySetting::first(), // This retrieves the first company setting from the database
-            'usePublicPath' => false, // <== Tells Blade to use asset()
-        ];
-    }
+    // public function getViewData(): array
+    // {
+    //     return [
+    //         'proposal' => $this->record,
+    //         'company' => CompanySetting::first(), // This retrieves the first company setting from the database
+    //         'usePublicPath' => false, // <== Tells Blade to use asset()
+    //     ];
+    // }
 }

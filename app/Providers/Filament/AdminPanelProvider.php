@@ -35,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
             // ->favicon(asset('favicon.ico')) // Optional
             //  ->sidebarCollapsibleOnDesktop()
             // ->font('Poppins')
-            ->darkMode(false) // To disable dark mode switching
+            // ->darkMode(false) // To disable dark mode switching
             ->login()
             ->sidebarCollapsibleOnDesktop()
             ->colors([
