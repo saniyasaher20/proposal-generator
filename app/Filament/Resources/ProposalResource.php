@@ -18,6 +18,8 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Split;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -215,16 +217,39 @@ class ProposalResource extends Resource
 
                     ]),
 
-                    Section::make()
-                        ->compact()->schema([
-                            \Filament\Forms\Components\View::make('pdf.proposal-preview')
-                                ->label(false)
-                                ->viewData([
-                                    'company' => CompanySetting::first(),
-                                    'usePublicPath' => false,
-                                    'proposal' => $form->getRecord(),
-                                ]),
-                        ])
+                    // Section::make()
+                    //     ->compact()->schema([
+                    //         \Filament\Forms\Components\View::make('pdf.proposal-preview')
+                    //             ->label(false)
+                    //             ->viewData([
+                    //                 'company' => CompanySetting::first(),
+                    //                 'usePublicPath' => false,
+                    //                 'proposal' => $form->getRecord(),
+                    //             ]),
+                    //     ]),
+
+                    Tabs::make('Preview')->tabs([
+                        Tab::make('HTML Preview (Fast)')
+                            ->schema([
+                                \Filament\Forms\Components\View::make('pdf.html-preview')
+                                    ->label(false)
+                                    ->viewData([
+                                        'proposal' => $form->getRecord(),
+                                        'usePublicPath' => false, // <== Tells Blade to use asset()
+                                        'company' => CompanySetting::first(),
+                                    ]),
+                            ])->extraAttributes(['class' => 'p-0']),
+                        Tab::make('PDF Preview (Accurate)')
+                            ->schema([
+                                \Filament\Forms\Components\View::make('pdf.pdf-preview')
+                                    ->label(false)
+                                    ->viewData([
+                                        'proposal' => $form->getRecord(),
+                                        'usePublicPath' => true, // <== Tells Blade to use public_path()
+                                        'company' => CompanySetting::first(),
+                                    ]),
+                            ])->extraAttributes(['class' => 'p-0']),
+                    ])
                     // Section::make()
                     //     ->compact()
                     //     ->schema([

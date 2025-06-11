@@ -11,7 +11,7 @@ use Filament\Resources\Pages\Page;
 class ProposalPreviewPdf extends Page
 {
     protected static string $resource = ProposalResource::class;
-    protected static string $view = 'pdf.proposal-preview';
+    // protected static string $view = 'pdf.proposal-preview';
 
     // public Proposal $record;
     // public $refreshKey = 0; // Initialize refresh key

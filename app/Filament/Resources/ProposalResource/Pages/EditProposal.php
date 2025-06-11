@@ -28,6 +28,7 @@ class EditProposal extends EditRecord
     }
     protected function afterSave(): void
     {
+        // This will update the pdf afterSave
         $this->dispatch('proposal-updated');
     }
 }
