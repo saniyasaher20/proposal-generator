@@ -14,3 +14,6 @@ contact_name (text), contact_number(number), facsimile(text), email, website(tex
 
 DRAWING PAGE:
 revision (text), drawing_images(multiple image location), studio_principal_name(null), drawn_by_name(null), checked_by_name (null), sheet_number (null)
+
+
+php artisan filament:assets

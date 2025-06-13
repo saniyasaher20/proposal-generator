@@ -11,6 +11,6 @@
     gap: 0.6rem !important; /* Default 1.5rem */
 }
 
-.proposal-form .swatches-image fieldset.filepond--data:has(input) .filepond--drop-label {
+.proposal-form .swatches-image:has(.filepond--data input) .filepond--drop-label {
     display: none;
 }
