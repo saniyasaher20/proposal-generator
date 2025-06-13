@@ -1,3 +1,16 @@
-.image-preview-width .filepond--item{
-    width: calc(49% - .5rem) !important;
+.image-preview-width .filepond--item {
+    width: calc(49% - 0.5rem) !important;
+}
+
+/* Reduce spacing between form fields */
+.proposal-form .fi-fo-field-wrp > div {
+    row-gap: 0.1rem !important; /* Default 0.5rem*/
+}
+
+.proposal-form .proposal-form-section .fi-fo-component-ctn {
+    gap: 0.6rem !important; /* Default 1.5rem */
+}
+
+.proposal-form .swatches-image fieldset.filepond--data:has(input) .filepond--drop-label {
+    display: none;
 }

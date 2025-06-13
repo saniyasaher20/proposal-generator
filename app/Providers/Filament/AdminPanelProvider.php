@@ -20,6 +20,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Assets\Css;
+use Filament\Support\Enums\MaxWidth;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -29,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->maxContentWidth(MaxWidth::Full)
             ->brandName('Proposal System')
             //  ->brandLogo(asset('images/logo.png')) // Optional
             //  ->brandLogoHeight('2rem');

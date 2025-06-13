@@ -38,218 +38,235 @@ class ProposalResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->extraAttributes(['class' => 'proposal-form'])
             ->schema([
 
                 Split::make([
-                    Section::make('Left')->schema([
-                        Hidden::make('user_id')
-                            ->default(fn() => Auth::id())
-                            ->required(),
+                    Section::make()
+                        ->extraAttributes(['class' => 'proposal-form-section'])
+                        ->schema([
+                            Hidden::make('user_id')
+                                ->default(fn() => Auth::id())
+                                ->required(),
 
-                        Grid::make(3)
-                            ->schema([
-                                TextInput::make('project_name')
-                                    ->required()
-                                    ->maxLength(255),
-
-                                TextInput::make('project_location')->label('Project Location'),
-
-                                TextInput::make('project_code')
-                                    ->required()
-                                    ->unique(ignoreRecord: true)
-                                    ->maxLength(50),
-                            ]),
-                        Grid::make(3)
-                            ->schema([
-                                DatePicker::make('issue_date')
-                                    ->required()
-                                    ->default(now()),
-
-                                TextInput::make('revision_label')
-                                    ->placeholder('e.g. REV-1'),
-
-                                Select::make('status')
-                                    ->required()
-                                    ->default('draft')
-                                    ->options([
-                                        'draft' => 'Draft',
-                                        'pending' => 'Pending',
-                                        'approved' => 'Approved',
-                                        'rejected' => 'Rejected',
-                                    ]),
-                            ]),
-
-                        Grid::make(3)
-                            ->schema([
-                                TextInput::make('spec_name')->label('Specification Name'),
-                                TextInput::make('spec_series')->label('Specification Series'),
-                                TextInput::make('spec_area')->label('Specification Area'),
-                            ]),
-
-
-                        // Furniture Items
-                        Repeater::make('items')
-                            ->relationship('items')
-                            ->label('Furniture / Artwork Items')
-                            ->collapsible()
-                            ->defaultItems(1)
-                            ->collapsed()
-                            ->columns(3)
-                            ->schema([
-
-                                Grid::make(4)->schema([
-
-
-                                    Grid::make(1)->schema([
-                                        TextInput::make('item_code')->required()->label('Code'),
-                                        TextInput::make('item_name')->required()->label('Name'),
-                                        TextInput::make('manufacturer_details')->label('Manufacturer Details'),
-                                    ])->columnSpan(1),
-
-                                    Grid::make(1)->schema([
-                                        TextInput::make('item_description')->label('Description'),
-
-                                        TextInput::make('item_category')
-                                            ->label('Category')
-                                            ->required()
-                                            ->reactive() // so we can modify state immediately
-                                            ->afterStateUpdated(function (callable $set, $state) {
-                                                if ($state === null) {
-                                                    $set('item_category', null);
-                                                    return;
-                                                }
-
-                                                // Collapse multiple whitespace into one,
-                                                // then trim, then Title Case:
-                                                $collapsed = preg_replace('/\s+/', ' ', $state);
-                                                $trimmed  = trim($collapsed);
-                                                $titleCased = mb_convert_case($trimmed, MB_CASE_TITLE, 'UTF-8');
-
-                                                $set('item_category', $titleCased);
-                                            }),
-                                        TextInput::make('product_code')->label('Product Code'),
-
-                                    ])->columnSpan(1),
-
-                                    Grid::make(1)->schema([
-                                        TextInput::make('location')->label('Area/Location'),
-                                        TextInput::make('item_quantity')->numeric()->required()->label('Quantity'),
-                                        TextInput::make('revision')->label('Revision'),
-                                    ])->columnSpan(1),
-
-
-                                    FileUpload::make('thumbnail_path')
-                                        ->label('Thumbnail')
-                                        ->image()
-                                        ->disk('public')
-                                        ->directory('proposals/thumbnails')
+                            Grid::make(3)
+                                ->schema([
+                                    TextInput::make('project_name')
                                         ->required()
-                                        ->openable(),
+                                        ->maxLength(255),
 
+                                    TextInput::make('project_location')->label('Project Location'),
+
+                                    TextInput::make('project_code')
+                                        ->required()
+                                        ->unique(ignoreRecord: true)
+                                        ->maxLength(50),
+                                ]),
+                            Grid::make(3)
+                                ->schema([
+                                    DatePicker::make('issue_date')
+                                        ->required()
+                                        ->default(now()),
+
+                                    TextInput::make('revision_label')
+                                        ->placeholder('e.g. REV-1'),
+
+                                    Select::make('status')
+                                        ->required()
+                                        ->default('draft')
+                                        ->options([
+                                            'draft' => 'Draft',
+                                            'pending' => 'Pending',
+                                            'approved' => 'Approved',
+                                            'rejected' => 'Rejected',
+                                        ]),
                                 ]),
 
-                                // TextInput::make('item_category')->label('Category'),
+                            Grid::make(3)
+                                ->schema([
+                                    TextInput::make('spec_name')->label('Specification Name'),
+                                    TextInput::make('spec_series')->label('Specification Series'),
+                                    TextInput::make('spec_area')->label('Specification Area'),
+                                ]),
 
-                                // TextInput::make('materials')->label('Materials'),
 
-                                Section::make([
+                            // Furniture Items
+                            Repeater::make('items')
+                                ->relationship('items')
+                                ->label('Furniture / Artwork Items')
+                                ->collapsible()
+                                ->defaultItems(1)
+                                ->collapsed()
+                                ->columns(3)
+                                ->columnSpanFull()
+                                ->reorderable()
+                                ->itemLabel(fn(array $state): ?string => isset($state['item_name'], $state['item_category']) ? $state['item_name'] . ' (' . $state['item_category']  . ')' : null)
+                                ->schema([
+
                                     Grid::make(4)->schema([
-                                        TextInput::make('model_name')->label('Model Name'),
-                                        TextInput::make('model_number')->label('Model Number'),
 
-                                        TextInput::make('item_width')->numeric()->label('Width (mm)'),
-                                        TextInput::make('item_length')->numeric()->label('Length (mm)'),
-                                        TextInput::make('item_height')->numeric()->label('Height (mm)'),
 
-                                        TextInput::make('item_material')->label('Materials'),
-                                        TextInput::make('item_details')->label('Details'),
-                                        TextInput::make('item_note')
-                                            ->label('Note')
-                                            ->default('Supplier to coordinate the items structure and stability.'),
+                                        Grid::make(1)->schema([
+                                            TextInput::make('item_code')->required()->label('Code'),
+                                            TextInput::make('product_code')->label('Product Code'),
+
+                                        ])->columnSpan(1),
+
+                                        Grid::make(1)->schema([
+                                            TextInput::make('item_name')->required()->label('Name'),
+
+                                            TextInput::make('item_category')
+                                                ->label('Category')
+                                                ->required()
+                                                ->reactive() // so we can modify state immediately
+                                                ->afterStateUpdated(function (callable $set, $state) {
+                                                    if ($state === null) {
+                                                        $set('item_category', null);
+                                                        return;
+                                                    }
+
+                                                    // Collapse multiple whitespace into one,
+                                                    // then trim, then Title Case:
+                                                    $collapsed = preg_replace('/\s+/', ' ', $state);
+                                                    $trimmed  = trim($collapsed);
+                                                    $titleCased = mb_convert_case($trimmed, MB_CASE_TITLE, 'UTF-8');
+
+                                                    $set('item_category', $titleCased);
+                                                }),
+                                        ])->columnSpan(1),
+
+                                        Grid::make(1)->schema([
+                                            TextInput::make('location')->label('Area/Location'),
+                                            TextInput::make('item_quantity')->numeric()->required()->label('Quantity'),
+                                        ])->columnSpan(1),
+
+
+                                        FileUpload::make('thumbnail_path')
+                                            ->label('Thumbnail')
+                                            ->image()
+                                            ->disk('public')
+                                            ->directory('proposals/thumbnails')
+                                            ->required()
+                                            ->imagePreviewHeight('200')
+                                            ->loadingIndicatorPosition('left')
+                                            ->panelAspectRatio('3:2')
+                                            ->panelLayout('integrated')
+                                            ->removeUploadedFileButtonPosition('right')
+                                            ->uploadButtonPosition('left')
+                                            ->uploadProgressIndicatorPosition('left')
+                                            ->openable(),
 
                                     ]),
-                                ])->columnSpan(4),
 
-
-                                Grid::make(3)->schema([
-
-                                    FileUpload::make('drawings')
-                                        ->label('Drawings')
-                                        ->image()
-                                        ->multiple()
-                                        ->reorderable()
-                                        ->disk('public')
-                                        ->directory('proposals/drawings')
-                                        ->panelLayout('grid')
-                                        ->openable()
-                                        ->columnSpan(1)
-                                        ->extraAttributes(['class' => 'image-preview-width']),
-
-                                    // Swatches
-                                    Repeater::make('swatches')
-                                        ->relationship('swatches')
-                                        ->label('Swatches')
-                                        ->schema([
-                                            FileUpload::make('image_path')
-                                                ->label('Image')
-                                                ->image()
-                                                ->disk('public')
-                                                ->directory('proposals/swatches')
-                                                ->panelLayout('square')
-                                                ->openable()
-                                                ->imagePreviewHeight('80')->columnSpan(1),
-
-                                            Grid::make(1)->schema([
-                                                TextInput::make('name')->label('Name'),
-                                                TextInput::make('code')->label('Code'),
-                                            ])->columnSpan(2)
-                                        ])
-                                        ->itemLabel(fn(array $state): ?string => isset($state['name']) ? $state['name'] : null)
-                                        ->columns(3)
-                                        ->collapsible()
-                                        ->defaultItems(1)
-                                        ->columnSpan(2),
-                                ])
-                            ])
-                            ->columnSpanFull()
-                            ->reorderable()
-                            ->itemLabel(fn(array $state): ?string => isset($state['item_name'], $state['item_category']) ? $state['item_name'] . ' (' . $state['item_category']  . ')' : null),
-
-                    ]),
-
-                    // Section::make()
-                    //     ->compact()->schema([
-                    //         \Filament\Forms\Components\View::make('pdf.proposal-preview')
-                    //             ->label(false)
-                    //             ->viewData([
-                    //                 'company' => CompanySetting::first(),
-                    //                 'usePublicPath' => false,
-                    //                 'proposal' => $form->getRecord(),
-                    //             ]),
-                    //     ]),
-
-                    Tabs::make('Preview')->tabs([
-                        Tab::make('HTML Preview (Fast)')
-                            ->schema([
-                                \Filament\Forms\Components\View::make('pdf.html-preview')
-                                    ->label(false)
-                                    ->viewData([
-                                        'proposal' => $form->getRecord(),
-                                        'usePublicPath' => false, // <== Tells Blade to use asset()
-                                        'company' => CompanySetting::first(),
+                                    Grid::make(3)->schema([
+                                        TextInput::make('manufacturer_details')->label('Manufacturer Details'),
+                                        TextInput::make('item_description')->label('Description'),
+                                        TextInput::make('revision')->label('Revision'),
                                     ]),
-                            ])->extraAttributes(['class' => 'p-0']),
-                        Tab::make('PDF Preview (Accurate)')
-                            ->schema([
-                                \Filament\Forms\Components\View::make('pdf.pdf-preview')
-                                    ->label(false)
-                                    ->viewData([
-                                        'proposal' => $form->getRecord(),
-                                        'usePublicPath' => true, // <== Tells Blade to use public_path()
-                                        'company' => CompanySetting::first(),
-                                    ]),
-                            ])->extraAttributes(['class' => 'p-0']),
-                    ])
+
+                                    // TextInput::make('item_category')->label('Category'),
+
+                                    // TextInput::make('materials')->label('Materials'),
+
+                                    Section::make([
+                                        Grid::make(4)->schema([
+                                            TextInput::make('model_name')->label('Model Name'),
+                                            TextInput::make('item_width')->numeric()->label('Width (mm)'),
+                                            TextInput::make('item_length')->numeric()->label('Length (mm)'),
+                                            TextInput::make('item_height')->numeric()->label('Height (mm)'),
+
+                                            TextInput::make('model_number')->label('Model Number'),
+                                            TextInput::make('item_material')->label('Materials'),
+                                            TextInput::make('item_details')->label('Details'),
+                                            TextInput::make('item_note')
+                                                ->label('Note')
+                                                ->default('Supplier to coordinate the items structure and stability.'),
+
+                                        ]),
+                                    ])->columnSpan(4),
+
+
+                                    Grid::make(2)->schema([
+
+                                        FileUpload::make('drawings')
+                                            ->label('Drawings')
+                                            ->image()
+                                            ->multiple()
+                                            ->reorderable()
+                                            ->disk('public')
+                                            ->directory('proposals/drawings')
+                                            ->panelLayout('grid')
+                                            ->openable()
+                                            // ->columnSpan()
+                                            // ->imagePreviewHeight('200')
+                                            ->loadingIndicatorPosition('left')
+                                            ->panelAspectRatio('1:1')
+                                            ->removeUploadedFileButtonPosition('right')
+                                            ->uploadButtonPosition('left')
+                                            ->uploadProgressIndicatorPosition('left')
+                                            ->extraAttributes(['class' => 'image-preview-width']),
+
+                                        // Swatches
+                                        Repeater::make('swatches')
+                                            ->relationship('swatches')
+                                            ->label('Swatches')
+                                            ->itemLabel(fn(array $state): ?string => isset($state['name']) ? $state['name'] : null)
+                                            ->columns(3)
+                                            ->collapsible()
+                                            ->collapsed()
+                                            ->defaultItems(1)
+                                            // ->columnSpan(1)
+                                            ->schema([
+                                                FileUpload::make('image_path')
+                                                    ->label('Image')
+                                                    ->image()
+                                                    ->disk('public')
+                                                    ->imageResizeMode('cover')
+                                                    ->directory('proposals/swatches')
+                                                    // ->panelLayout('square')
+                                                    // ->openable()
+                                                    ->loadingIndicatorPosition('left')
+                                                    ->removeUploadedFileButtonPosition('right')
+                                                    ->uploadButtonPosition(false)
+                                                    ->uploadProgressIndicatorPosition('left')
+                                                    ->imagePreviewHeight('80')
+                                                    ->columnSpan(1)
+                                                    ->extraAttributes(['class' => 'swatches-image']),
+
+                                                Grid::make(1)->schema([
+                                                    TextInput::make('name')->label('Name'),
+                                                    TextInput::make('code')->label('Code'),
+                                                ])->columnSpan(2)
+                                            ]),
+                                    ])
+                                ]),
+
+                        ]),
+
+                    Tabs::make('Preview')
+                        ->extraAttributes(['class' => 'proposal-preview-tabs'])
+                        ->tabs([
+                            Tab::make('HTML Preview (Fast)')
+                                ->schema([
+                                    \Filament\Forms\Components\View::make('pdf.html-preview')
+                                        ->label(false)
+                                        ->viewData([
+                                            'proposal' => $form->getRecord(),
+                                            'usePublicPath' => false, // <== Tells Blade to use asset()
+                                            'company' => CompanySetting::first(),
+                                        ]),
+                                ])->extraAttributes(['class' => 'p-0']),
+                            Tab::make('PDF Preview (Accurate)')
+                                ->schema([
+                                    \Filament\Forms\Components\View::make('pdf.pdf-preview')
+                                        ->label(false)
+                                        ->viewData([
+                                            'proposal' => $form->getRecord(),
+                                            'usePublicPath' => true, // <== Tells Blade to use public_path()
+                                            'company' => CompanySetting::first(),
+                                        ]),
+                                ])->extraAttributes(['class' => 'p-0']),
+                        ])
                     // Section::make()
                     //     ->compact()
                     //     ->schema([
