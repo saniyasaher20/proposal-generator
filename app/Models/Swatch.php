@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Swatch extends Model
 {
     use HasFactory;
-
+    public $timestamps = true;
+    
     protected $fillable = [
         'proposal_item_id',
         'image_path',

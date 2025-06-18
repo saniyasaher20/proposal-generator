@@ -14,7 +14,7 @@
 		</tr>
 		<tr>
 			<td style="width: 10%;">
-				<img class="logo" src="{{ public_path('storage/' . $company->logo_path) }}" alt="Company Logo"
+				<img class="logo" src="{{ $usePublicPath ? public_path('storage/' . $company->logo_path) : asset('storage/' . $company->logo_path) }}" alt="Company Logo"
 					style="width:120px;">
 				<br>
 				<div class="text-condensed text-xs" >

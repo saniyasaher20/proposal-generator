@@ -36,6 +36,7 @@ class ProposalItem extends Model
         'item_material',
         'item_details',
         'item_note', //default - Supplier to coordinate the items structure and stability
+        'sort_order',
     ];
 
     protected $casts = [

@@ -6,7 +6,7 @@
 					<div class="img-sm-wrapper">
 						<div class="img-sm"
 							style="
-									 background: url('{{ public_path('storage/' . $swatch->image_path) }}') center center/cover no-repeat;">
+									 background: url('{{ $usePublicPath ? public_path('storage/' . $swatch->image_path) : asset('storage/' . $swatch->image_path) }}') center center/cover no-repeat;">
 						</div>
 						<div style="font-size: 12px; margin-top: 1px;">{{ $swatch->name }}<br>{{ $swatch->code }}</div>
 					</div>
@@ -14,7 +14,7 @@
 				@endforeach
 				<div class="img-sm-wrapper">
 					@if ($item->thumbnail_path)
-						<img src="{{ public_path('storage/' . $item->thumbnail_path) }}" alt="{{ $item->item_name }}"
+						<img src="{{ $usePublicPath ? public_path('storage/' . $item->thumbnail_path) : asset('storage/' . $item->thumbnail_path) }}" alt="{{ $item->item_name }}"
 							style="max-height: 100%; max-width: 100%; width: 100%; object-fit: contain; border: 1px solid #ccc; padding: 2px; display: block; margin-left: auto;">
 					@endif
 				</div>
@@ -25,13 +25,13 @@
 				<tr style="vertical-align: middle; text-align: center;">
 					<td class="w-50">
 						@if (isset($item->drawings[$i]))
-							<img src="{{ public_path('storage/' . $item->drawings[$i]) }}" alt="Drawing {{ $i + 1 }}"
+							<img src="{{ $usePublicPath ? public_path('storage/' . $item->drawings[$i]) : asset('storage/' . $item->drawings[$i]) }}" alt="Drawing {{ $i + 1 }}"
 								style="max-width: 100%; max-height: 300px; object-fit: contain; display: block; margin: 0 auto;">
 						@endif
 					</td>
 					<td>
 						@if (isset($item->drawings[$i + 1]))
-							<img src="{{ public_path('storage/' . $item->drawings[$i + 1]) }}" alt="Drawing {{ $i + 2 }}"
+							<img src="{{ $usePublicPath ? public_path('storage/' . $item->drawings[$i + 1]) : asset('storage/' . $item->drawings[$i + 1]) }}" alt="Drawing {{ $i + 2 }}"
 								style="max-width: 100%; max-height: 300px; object-fit: contain; display: block; margin: 0 auto;">
 						@endif
 					</td>

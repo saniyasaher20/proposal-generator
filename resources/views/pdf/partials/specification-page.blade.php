@@ -48,7 +48,7 @@
 						<td>{{ $item->location }}</td>
 						<td style="text-align: center;">
 							@if ($item->thumbnail_path)
-								<img src="{{ public_path('storage/' . $item->thumbnail_path) }}" alt="Item Image"
+								<img src="{{ $usePublicPath ? public_path('storage/' . $item->thumbnail_path) : asset('storage/' . $item->thumbnail_path) }}" alt="Item Image"
 									style="width: 80px; height: auto;">
 							@else
 								N/A

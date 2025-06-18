@@ -11,7 +11,9 @@
 			</div>
 		</td>
 		<td style="text-align: right;">
-			<img src="{{ public_path('storage/' . $company->logo_path) }}" alt="House of Elm Logo" style="width: 200px;">
+			<img
+				src="{{ $usePublicPath ? public_path('storage/' . $company->logo_path) : asset('storage/' . $company->logo_path) }}"
+				alt="House of Elm Logo" style="width: 200px;">
 
 		</td>
 	</tr>

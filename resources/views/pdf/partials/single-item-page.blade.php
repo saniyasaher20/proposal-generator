@@ -1,4 +1,4 @@
-@foreach ($proposal->items as $item)
+
 	<section class="a4-size page-break">
 		{{-- ITEM HEADER TABLE --}}
 		<table class="equal-width table">
@@ -88,12 +88,13 @@
 							{{-- Right: thumbnail image --}}
 							<td style="width: 40%; vertical-align: top; text-align: right;" rowspan="2">
 								@if ($item->thumbnail_path)
-									<img src="{{ public_path('storage/' . $item->thumbnail_path) }}" alt="Furniture"
+									<img
+										src="{{ $usePublicPath ? public_path('storage/' . $item->thumbnail_path) : asset('storage/' . $item->thumbnail_path) }}"
+										alt="Furniture"
 										style="max-height: 100%; max-width: 100%; width: 100%; object-fit: contain; border: 1px solid #ccc; padding: 2px; display: block; margin-left: auto;">
 								@else
 									{{-- If no thumbnail, you could leave an empty block or a placeholder --}}
-									<div
-										style="width: 100%; height: 100%; border: 1px solid #ccc; text-align: center; line-height: 80px; color: #999;">
+									<div style="width: 100%; height: 100%; border: 1px solid #ccc; text-align: center; color: #999;">
 										No Image
 									</div>
 								@endif
@@ -107,7 +108,7 @@
 									<div class="img-sm-wrapper">
 										<div class="img-sm"
 											style="
-									 background: url('{{ public_path('storage/' . $swatch->image_path) }}') center center/cover no-repeat;">
+									 background: url('{{ $usePublicPath ? public_path('storage/' . $swatch->image_path) : asset('storage/' . $swatch->image_path) }}') center center/cover no-repeat;">
 										</div>
 										<div style="font-size: 12px; margin-top: 1px;">{{ $swatch->name }}<br>{{ $swatch->code }}</div>
 									</div>
@@ -152,7 +153,8 @@
 				{{-- Right: Static “Required Items” --}}
 				<td style="border-top: none; vertical-align: top;">
 					<div class="fw-bold text-sm uppercase">REQUIRED ITEMS FOR DESIGN APPROVAL PRIOR TO FABRICATION:</div>
-					<ul class="text-sm" style="line-height: 1; margin-left: -20px; margin-top: 0px;">
+					<ul class="list-disc pl-5 text-sm">
+						{{--* tailwind classes only works in html preview , and not in dompdf --}}
 						<li>Shop Drawing</li>
 						<li>Finish Sample</li>
 						<li>Prototype</li>
@@ -173,6 +175,5 @@
 			</tr>
 		</table>
 	</section>
-	{{-- DRAWING PAGE --}}
-	@include('pdf.partials.drawing-page')
-@endforeach
+
+

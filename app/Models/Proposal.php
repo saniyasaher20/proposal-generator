@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Proposal extends Model
 {
     use HasFactory, SoftDeletes;
@@ -35,6 +36,6 @@ class Proposal extends Model
 
     public function items()
     {
-        return $this->hasMany(ProposalItem::class);
+        return $this->hasMany(ProposalItem::class)->orderBy('sort_order');
     }
 }

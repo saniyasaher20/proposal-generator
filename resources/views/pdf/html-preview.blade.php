@@ -59,6 +59,7 @@
 
 	.page-zoom-container {
 		transform-origin: top left;
+		transform: scale(0.7);
 	}
 
 	.button-wrapper {
@@ -93,8 +94,17 @@
 			@include('pdf.partials.cover-page')
 		</div>
 		<div class="page">
-			@include('pdf.partials.cover-page')
+			@include('pdf.partials.specification-page')
 		</div>
+		@foreach ($proposal->items as $item)
+			<div class="page">
+				@include('pdf.partials.single-item-page')
+			</div>
+			{{-- DRAWING PAGE --}}
+			<div class="page">
+				@include('pdf.partials.drawing-page')
+			</div>
+		@endforeach
 	</div>
 </div>
 

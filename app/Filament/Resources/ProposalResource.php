@@ -100,6 +100,7 @@ class ProposalResource extends Resource
                                 ->columns(3)
                                 ->columnSpanFull()
                                 ->reorderable()
+                                ->orderColumn('sort_order')
                                 ->itemLabel(fn(array $state): ?string => isset($state['item_name'], $state['item_category']) ? $state['item_name'] . ' (' . $state['item_category']  . ')' : null)
                                 ->schema([
 
@@ -318,6 +319,8 @@ class ProposalResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+
+                
                 Tables\Actions\Action::make('pdf')
                     ->label('PDF')
                     ->icon('heroicon-o-document-arrow-down')

@@ -4,7 +4,7 @@
 		--page-margin: 1cm;
 	}
 
-	a {
+	.proposal-form a {
 		color: #0000EE;
 		text-decoration: underline;
 	}
@@ -31,50 +31,50 @@
 		page-break-after: always;
 	}
 
-	.table {
+	.proposal-form .table {
 		width: 100%;
 		font-size: 13px;
 		border-collapse: collapse;
 	}
 
-	.table th,
-	.table td {
+	.proposal-form .table th,
+	.proposal-form .table td {
 		border: 0.5px solid #000;
 		padding: 4px 6px;
 	}
 
-	.table.table-text-center td {
+	.proposal-form .table.table-text-center td {
 		text-align: center;
 	}
 
-	.table th {
+	.proposal-form .table th {
 		vertical-align: middle;
 	}
 
-	.table td {
+	.proposal-form .table td {
 		vertical-align: top;
 	}
 
-	.table.equal-width {
+	.proposal-form .table.equal-width {
 		table-layout: fixed;
 		width: 100%;
 	}
 
-	.table.equal-width td {
+	.proposal-form .table.equal-width td {
 		/* width: 33.33%; */
 		vertical-align: top;
 		word-break: break-word;
 		white-space: normal;
 	}
 
-	.table-borderless td {
+	.proposal-form .table-borderless td {
 		border: none !important;
 		vertical-align: top;
 		text-align: left;
 	}
 
-	table.single-item-info-table td,
-	table.single-item-info-table th,
+	.proposal-form table.single-item-info-table td,
+	.proposal-form table.single-item-info-table th,
 	{
 	padding: auto 0;
 	}
