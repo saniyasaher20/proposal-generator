@@ -20,7 +20,6 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Split;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
-use Filament\Forms\Components\ViewField;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -54,8 +53,7 @@ class ProposalResource extends Resource
                                 ->schema([
                                     TextInput::make('project_name')
                                         ->required()
-                                        ->maxLength(255)
-                                        ->live(),
+                                        ->maxLength(255),
 
                                     TextInput::make('project_location')->label('Project Location'),
 
@@ -251,26 +249,36 @@ class ProposalResource extends Resource
                         ->tabs([
                             Tab::make('HTML Preview (Fast)')
                                 ->schema([
-                                    ViewField::make('preview')
-                                        ->view('pdf.html-preview')
+                                    \Filament\Forms\Components\View::make('pdf.html-preview')
+                                        ->label(false)
                                         ->viewData([
                                             'proposal' => $form->getRecord(),
-                                            'usePublicPath' => false,
+                                            'usePublicPath' => false, // <== Tells Blade to use asset()
                                             'company' => CompanySetting::first(),
                                         ]),
                                 ])->extraAttributes(['class' => 'p-0']),
                             Tab::make('PDF Preview (Accurate)')
                                 ->schema([
-                                    ViewField::make('preview')
-                                        ->view('pdf.pdf-preview')
+                                    \Filament\Forms\Components\View::make('pdf.pdf-preview')
+                                        ->label(false)
                                         ->viewData([
                                             'proposal' => $form->getRecord(),
                                             'usePublicPath' => true, // <== Tells Blade to use public_path()
                                             'company' => CompanySetting::first(),
                                         ]),
-
                                 ])->extraAttributes(['class' => 'p-0']),
-                        ])->columnSpan(1),
+                        ])
+                    // Section::make()
+                    //     ->compact()
+                    //     ->schema([
+                    //         \Filament\Forms\Components\View::make('pdf.html-preview')
+                    //             ->label(false)
+                    //             ->viewData([
+                    //                 'company' => CompanySetting::first(),
+                    //                 'usePublicPath' => false,
+                    //                 'proposal' => $form->getRecord(), // you may need to pass this too!
+                    //             ])
+                    //     ])
                 ])->columnSpanFull()
             ]);
     }
@@ -312,7 +320,7 @@ class ProposalResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
 
-
+                
                 Tables\Actions\Action::make('pdf')
                     ->label('PDF')
                     ->icon('heroicon-o-document-arrow-down')

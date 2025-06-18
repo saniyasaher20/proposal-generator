@@ -8,7 +8,7 @@
 				alt="House of Elm Logo" style="margin-bottom: 50px;">
 
 			<div class="project-info" style="margin-bottom: 50px; font-size: 26px;">
-				<div class="fw-bold">{{ $evaluate(fn($get) => $get('project_name')) }}</div>
+				<div class="fw-bold">{{ $proposal->project_name }},</div>
 				<div class="fw-semibold"> {{ $proposal->project_location }}</div>
 			</div>
 
