@@ -19,10 +19,12 @@ class EditProposal extends EditRecord
                 ->label('Save Changes (Ctrl + S)')
                 ->keyBindings(['ctrl+s']),
 
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
-            Actions\ForceDeleteAction::make(),
-            Actions\RestoreAction::make(),
+            
+
+            // Actions\ViewAction::make(),
+            // Actions\DeleteAction::make(),
+            // Actions\ForceDeleteAction::make(),
+            // Actions\RestoreAction::make(),
 
         ];
     }
